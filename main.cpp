@@ -1,11 +1,11 @@
-#include "mainwindow.h"
-
 #include <QApplication>
+#include <panel.h>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+
+    Panel *mainPanel = new Panel();
+
     return a.exec();
 }
