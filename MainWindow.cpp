@@ -13,11 +13,10 @@ MainWindow::MainWindow()
 
     // Set scene properties
     scene->setSceneRect(0,0, width, height); // TODO: Improve screen size
-//    scene->setBackgroundBrush(QBrush(QImage(":/images/background.jpg").scaledToWidth(width))); // TODO: Setup Storage and add background image
+    scene->setBackgroundBrush(QBrush(QImage(":/images/background.jpg").scaledToWidth(width))); // TODO: Setup Storage and add background image
     setScene(scene);
-//    setWindowState(Qt::WindowFullScreen);
-//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Btn Demo
     firstBtn = new QPushButton();
