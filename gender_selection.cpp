@@ -22,16 +22,11 @@ Gender_Selection::Gender_Selection()
     femaleBtnProxy->setPos(mainWindow->width/2 - femaleBtnProxy->boundingRect().width() - 20,
                           mainWindow->height/2 - femaleBtnProxy->boundingRect().height()/2+30);
 
-    //QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
-
-//    show();
-
+    QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
 }
 
-
-
-//void Gender_Selection:: showMaleGradeWindow()
-//{
-//    mainWindow->clearScene();
-//    maleGrade = new male_grade();
-//}
+void Gender_Selection:: showMaleGradeWindow()
+{
+    mainWindow->clearScene();
+    maleGrade = new male_grade();
+}

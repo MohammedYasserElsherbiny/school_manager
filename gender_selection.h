@@ -13,9 +13,9 @@ public:
 
 private:
     QPushButton *maleBtn, *femaleBtn;
+    male_grade *maleGrade;
     QGraphicsProxyWidget *maleBtnProxy, *femaleBtnProxy;
     void showMaleGradeWindow();
-
 };
 
 #endif // GENDER_SELECTION_H

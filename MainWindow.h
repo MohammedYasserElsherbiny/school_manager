@@ -19,12 +19,10 @@ public:
     QGraphicsScene *scene;
     QScreen *screen;
     Gender_Selection *gender_selection_window;
-    male_grade *maleGrade;
+    void clearScene();
 
 private:
-    void clearScene();
     void showGenderSelectionWindow();
-    void showMaleGradeWindow();
     QPushButton *startBtn;
     QGraphicsProxyWidget *startBtnProxy;
 };
