@@ -28,6 +28,8 @@ MainWindow::MainWindow()
     // create on click event listeners
     QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);
 
+    //QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
+
     show();
 }
 
@@ -41,5 +43,8 @@ void MainWindow::clearScene()
 void MainWindow::showGenderSelectionWindow()
 {
     clearScene();
+
     gender_selection_window = new Gender_Selection();
 }
+
+

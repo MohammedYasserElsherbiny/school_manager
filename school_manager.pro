@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     MainWindow.cpp \
     gender_selection.cpp \
-    main.cpp
+    main.cpp \
+    male_grade.cpp
 
 HEADERS += \
     MainWindow.h \
-    gender_selection.h
+    gender_selection.h \
+    male_grade.h
 
 FORMS +=
 

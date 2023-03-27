@@ -9,6 +9,7 @@
 #include <QBrush>
 #include <QImage>
 #include <gender_selection.h>
+#include <male_grade.h>
 
 class MainWindow : public QGraphicsView
 {
@@ -18,10 +19,12 @@ public:
     QGraphicsScene *scene;
     QScreen *screen;
     Gender_Selection *gender_selection_window;
+    male_grade *maleGrade;
 
 private:
     void clearScene();
     void showGenderSelectionWindow();
+    void showMaleGradeWindow();
     QPushButton *startBtn;
     QGraphicsProxyWidget *startBtnProxy;
 };
