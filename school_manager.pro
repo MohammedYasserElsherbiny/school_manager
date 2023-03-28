@@ -12,12 +12,14 @@ SOURCES += \
     MainWindow.cpp \
     gender_selection.cpp \
     main.cpp \
-    male_grade.cpp
+    male_grade.cpp \
+    male_options.cpp
 
 HEADERS += \
     MainWindow.h \
     gender_selection.h \
-    male_grade.h
+    male_grade.h \
+    male_options.h
 
 FORMS +=
 

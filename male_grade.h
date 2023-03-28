@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
+#include <male_options.h>
 
 
 class male_grade : public QGraphicsView
@@ -14,6 +15,8 @@ public:
 private:
     QPushButton *primaryBtn, *IntermediateBtn, *highschoolBtn;
     QGraphicsProxyWidget *primaryBtnProxy, *IntermediateBtnProxy, *highschoolBtnProxy;
+    male_options *maleOptions;
+    void showMaleOptionsWindow ();
 };
 
 #endif // MALE_GRADE_H
