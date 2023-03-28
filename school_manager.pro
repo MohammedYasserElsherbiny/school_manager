@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     MainWindow.cpp \
+    female_grade.cpp \
     gender_selection.cpp \
     main.cpp \
     male_grade.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     MainWindow.h \
+    female_grade.h \
     gender_selection.h \
     male_grade.h \
     male_options.h

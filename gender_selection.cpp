@@ -1,5 +1,6 @@
 #include "gender_selection.h"
 #include <male_grade.h>
+#include <female_grade.h>
 #include <MainWindow.h>
 
 extern MainWindow * mainWindow;
@@ -23,10 +24,17 @@ Gender_Selection::Gender_Selection()
                           mainWindow->height/2 - femaleBtnProxy->boundingRect().height()/2+30);
 
     QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
+    QObject::connect(femaleBtn, &QPushButton::clicked, this, &Gender_Selection::showFemaleGradeWindow);
 }
 
 void Gender_Selection:: showMaleGradeWindow()
 {
     mainWindow->clearScene();
     maleGrade = new male_grade();
+}
+
+void Gender_Selection:: showFemaleGradeWindow()
+{
+    mainWindow->clearScene();
+    femaleGrade = new female_grade();
 }
