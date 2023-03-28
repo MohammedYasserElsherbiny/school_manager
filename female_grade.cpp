@@ -33,4 +33,15 @@ female_grade::female_grade()
     femaleKindergartenBtnProxy = mainWindow->scene->addWidget(femaleKindergartenBtn);
     femaleKindergartenBtnProxy->setPos(mainWindow->width/2 - femaleKindergartenBtnProxy->boundingRect().width()/2,
                           mainWindow->height/2 - femaleKindergartenBtnProxy->boundingRect().height()/2+110);
+
+    QObject::connect(femalePrimaryBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleIntermediateBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleHighschoolBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleKindergartenBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+}
+
+void female_grade:: showFemaleOptionsWindow()
+{
+    mainWindow->clearScene();
+    femaleOptions = new female_options();
 }

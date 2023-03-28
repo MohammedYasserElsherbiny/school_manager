@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
+#include <female_options.h>
 
 
 class female_grade : public QGraphicsView
@@ -14,6 +15,8 @@ public:
 private:
     QPushButton *femalePrimaryBtn, *femaleIntermediateBtn, *femaleHighschoolBtn, *femaleKindergartenBtn;
     QGraphicsProxyWidget *femalePrimaryBtnProxy, *femaleIntermediateBtnProxy, *femaleHighschoolBtnProxy, *femaleKindergartenBtnProxy;
+    female_options *femaleOptions;
+    void showFemaleOptionsWindow ();
 };
 
 #endif // FEMALE_GRADE_H
