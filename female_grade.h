@@ -11,6 +11,7 @@ class female_grade : public QGraphicsView
 {
 public:
     female_grade();
+    void show_window();
 
 private:
     QPushButton *femalePrimaryBtn, *femaleIntermediateBtn, *femaleHighschoolBtn, *femaleKindergartenBtn, *backBtn;

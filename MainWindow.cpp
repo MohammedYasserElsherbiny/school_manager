@@ -21,16 +21,16 @@ MainWindow::MainWindow()
     // Btn Demo
     startBtn = new QPushButton();
     startBtn->setText("Start");
-    startBtnProxy = scene->addWidget(startBtn);
-    startBtnProxy->setPos(width/2 - startBtnProxy->boundingRect().width()/2,
-                          height - startBtnProxy->boundingRect().height() - 20);
+
+    // Init Windows
+    gender_selection_window = new Gender_Selection();
+    female_grade_window = new female_grade();
+//    male_grade_window = new male_grade();
+//    female_options_window = new female_options();
+//    male_options_window = new male_options();
 
     // create on click event listeners
     QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);
-
-    //QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
-
-    show();
 }
 
 void MainWindow::clearScene()
@@ -40,11 +40,18 @@ void MainWindow::clearScene()
     }
 }
 
+void MainWindow::show_window()
+{
+    startBtnProxy = scene->addWidget(startBtn);
+    startBtnProxy->setPos(width/2 - startBtnProxy->boundingRect().width()/2,
+                          height - startBtnProxy->boundingRect().height() - 20);
+}
+
 void MainWindow::showGenderSelectionWindow()
 {
     clearScene();
 
-    gender_selection_window = new Gender_Selection();
+    gender_selection_window->show_window();
 }
 
 

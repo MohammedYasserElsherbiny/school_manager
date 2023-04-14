@@ -11,6 +11,7 @@ class Gender_Selection : public QGraphicsView
 {
 public:
     Gender_Selection();
+    void show_window();
 
 private:
     QPushButton *maleBtn, *femaleBtn;
@@ -19,6 +20,7 @@ private:
     QGraphicsProxyWidget *maleBtnProxy, *femaleBtnProxy;
     void showMaleGradeWindow();
     void showFemaleGradeWindow();
+    void showMainWindow();
 };
 
 #endif // GENDER_SELECTION_H

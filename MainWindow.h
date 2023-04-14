@@ -10,6 +10,9 @@
 #include <QImage>
 #include <gender_selection.h>
 #include <male_grade.h>
+#include <female_grade.h>
+#include <female_options.h>
+#include <male_options.h>
 
 class MainWindow : public QGraphicsView
 {
@@ -19,7 +22,13 @@ public:
     QGraphicsScene *scene;
     QScreen *screen;
     Gender_Selection *gender_selection_window;
+    male_grade *male_grade_window;
+    female_grade *female_grade_window;
+    male_options *male_options_window;
+    female_options *female_options_window;
+
     void clearScene();
+    void show_window();
 
 private:
     void showGenderSelectionWindow();
