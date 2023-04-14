@@ -9,10 +9,11 @@ class female_options
 {
 public:
     female_options();
-
+    void show_window();
 private:
     QPushButton *femalePlanBtn, *femaleCircularsBtn, *femaleReportsBtn, *femaleAdditionalBtn, *backBtn;
     QGraphicsProxyWidget *femalePlanBtnProxy, *femaleCircularsBtnProxy, *femaleReportsBtnProxy, *femaleAdditionalBtnProxy, *backBtnProxy;
+    void showFemaleGradeWindow ();
 };
 
 #endif // FEMALE_OPTIONS_H

@@ -25,9 +25,9 @@ MainWindow::MainWindow()
     // Init Windows
     gender_selection_window = new Gender_Selection();
     female_grade_window = new female_grade();
-//    male_grade_window = new male_grade();
-//    female_options_window = new female_options();
-//    male_options_window = new male_options();
+    male_grade_window = new male_grade();
+    female_options_window = new female_options();
+    male_options_window = new male_options();
 
     // create on click event listeners
     QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);

@@ -58,5 +58,11 @@ void female_grade::show_window()
 void female_grade:: showFemaleOptionsWindow()
 {
     mainWindow->clearScene();
-    femaleOptions = new female_options();
+    mainWindow->female_options_window->show_window();
+}
+
+void female_grade::showGenderSelectionWindow()
+{
+    mainWindow->clearScene ();
+    mainWindow->gender_selection_window->show_window();
 }

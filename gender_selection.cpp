@@ -35,7 +35,7 @@ void Gender_Selection::show_window()
 void Gender_Selection::showMaleGradeWindow()
 {
     mainWindow->clearScene();
-    maleGrade = new male_grade();
+    mainWindow->male_grade_window->show_window();
 }
 
 void Gender_Selection::showFemaleGradeWindow()

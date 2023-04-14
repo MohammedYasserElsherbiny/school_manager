@@ -18,6 +18,7 @@ private:
     QGraphicsProxyWidget *femalePrimaryBtnProxy, *femaleIntermediateBtnProxy, *femaleHighschoolBtnProxy, *femaleKindergartenBtnProxy, *backBtnProxy;
     female_options *femaleOptions;
     void showFemaleOptionsWindow ();
+    void showGenderSelectionWindow ();
 };
 
 #endif // FEMALE_GRADE_H
