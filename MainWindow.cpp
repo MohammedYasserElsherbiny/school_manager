@@ -28,6 +28,7 @@ MainWindow::MainWindow()
     male_grade_window = new male_grade();
     female_options_window = new female_options();
     male_options_window = new male_options();
+    document_viewer = new Document_Viewer();
 
     // create on click event listeners
     QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);
@@ -51,7 +52,8 @@ void MainWindow::showGenderSelectionWindow()
 {
     clearScene();
 
-    gender_selection_window->show_window();
+//    gender_selection_window->show_window();
+    document_viewer->show_window();
 }
 
 

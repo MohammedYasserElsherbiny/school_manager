@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     MainWindow.cpp \
+    document_viewer.cpp \
     female_grade.cpp \
     female_options.cpp \
     gender_selection.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     MainWindow.h \
+    document_viewer.h \
     female_grade.h \
     female_options.h \
     gender_selection.h \

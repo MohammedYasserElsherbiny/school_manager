@@ -13,6 +13,7 @@
 #include <female_grade.h>
 #include <female_options.h>
 #include <male_options.h>
+#include <document_viewer.h>
 
 class MainWindow : public QGraphicsView
 {
@@ -21,12 +22,16 @@ public:
     int width, height;
     QGraphicsScene *scene;
     QScreen *screen;
+
+    // Windows declarations
     Gender_Selection *gender_selection_window;
     male_grade *male_grade_window;
     female_grade *female_grade_window;
     male_options *male_options_window;
     female_options *female_options_window;
+    Document_Viewer *document_viewer;
 
+    // Window functions
     void clearScene();
     void show_window();
 
