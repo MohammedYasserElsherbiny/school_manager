@@ -23,15 +23,6 @@ male_options::male_options()
     additionalBtn = new QPushButton("");
     additionalBtn->setText("اضافي");
 
-}
-
-void male_options::show_window()
-{
-    mainWindow->scene->setBackgroundBrush(
-                    QBrush(QImage(":/Assets/Images/male_options.jpg").scaledToWidth(mainWindow->width))
-                );
-
-
 
     planBtnProxy = mainWindow->scene->addWidget(planBtn);
     planBtnProxy->setPos(mainWindow->width/2 - planBtnProxy->boundingRect().width()/2,
@@ -54,10 +45,33 @@ void male_options::show_window()
     additionalBtnProxy = mainWindow->scene->addWidget(additionalBtn);
     additionalBtnProxy->setPos(mainWindow->width/2 - additionalBtnProxy->boundingRect().width()/2,
                                mainWindow->height/2 - additionalBtnProxy->boundingRect().height()/2+110);
+
+    planBtn->hide();
+    circularsBtn->hide();
+    reportsBtn->hide();
+    additionalBtn->hide();
+
+}
+
+void male_options::show_window()
+{
+    mainWindow->scene->setBackgroundBrush(
+                    QBrush(QImage(":/Assets/Images/male_options.jpg").scaledToWidth(mainWindow->width))
+                );
+
+
+    planBtn->show();
+    circularsBtn->show();
+    reportsBtn->show();
+    additionalBtn->show();
+    mainWindow->backBtn->show();
+
+    QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &male_options::showMaleGradeWindow);
+
 }
 
 void male_options::showMaleGradeWindow()
 {
     mainWindow->clearScene();
-    mainWindow->male_options_window->show_window();
+    mainWindow->male_grade_window->show_window();
 }

@@ -21,19 +21,6 @@ male_grade::male_grade()
     highschoolBtn->setText("مرحلة الثانوي");
 
 
-    QObject::connect(primaryBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
-    QObject::connect(IntermediateBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
-    QObject::connect(highschoolBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
-
-}
-
-void male_grade::show_window()
-{
-    mainWindow->scene->setBackgroundBrush(
-                    QBrush(QImage(":/Assets/Images/male_grade.jpg").scaledToWidth(mainWindow->width))
-    );
-
-
     primaryBtnProxy = mainWindow->scene->addWidget(primaryBtn);
     primaryBtnProxy->setPos(mainWindow->width/2 - primaryBtnProxy->boundingRect().width()/2,
                           mainWindow->height/2 - primaryBtnProxy->boundingRect().height()/2-10);
@@ -47,6 +34,31 @@ void male_grade::show_window()
     highschoolBtnProxy = mainWindow->scene->addWidget(highschoolBtn);
     highschoolBtnProxy->setPos(mainWindow->width/2 - highschoolBtnProxy->boundingRect().width()/2,
                           mainWindow->height/2 - highschoolBtnProxy->boundingRect().height()/2+70);
+
+    primaryBtn->hide();
+    IntermediateBtn->hide();
+    highschoolBtn->hide();
+
+
+    QObject::connect(primaryBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
+    QObject::connect(IntermediateBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
+    QObject::connect(highschoolBtn, &QPushButton::clicked, this, &male_grade::showMaleOptionsWindow);
+
+}
+
+void male_grade::show_window()
+{
+    mainWindow->scene->setBackgroundBrush(
+                    QBrush(QImage(":/Assets/Images/male_grade.jpg").scaledToWidth(mainWindow->width))
+    );
+
+    primaryBtn->show();
+    IntermediateBtn->show();
+    highschoolBtn->show();
+    mainWindow->backBtn->show();
+
+    QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &male_grade::showGenderSelectionWindow);
+
 }
 
 

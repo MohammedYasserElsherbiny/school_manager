@@ -18,20 +18,8 @@ female_grade::female_grade()
     femaleKindergartenBtn = new QPushButton("");
     femaleKindergartenBtn->setText("مرحلة الثانوي");
 
-    backBtn = new QPushButton("");
-    backBtn->setText("مرحلة الثانوي");
-
-    QObject::connect(femalePrimaryBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
-    QObject::connect(femaleIntermediateBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
-    QObject::connect(femaleHighschoolBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
-    QObject::connect(femaleKindergartenBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
-}
-
-void female_grade::show_window()
-{
-    mainWindow->scene->setBackgroundBrush(
-        QBrush(QImage(":/Assets/Images/female_grade.jpg").scaledToWidth(mainWindow->width))
-    );
+//    backBtn = new QPushButton("");
+//    backBtn->setText("مرحلة الثانوي");
 
     femalePrimaryBtnProxy = mainWindow->scene->addWidget(femalePrimaryBtn);
     femalePrimaryBtnProxy->setPos(mainWindow->width/2 - femalePrimaryBtnProxy->boundingRect().width()/2,
@@ -49,9 +37,38 @@ void female_grade::show_window()
     femaleHighschoolBtnProxy->setPos(mainWindow->width/2 - femaleHighschoolBtnProxy->boundingRect().width()/2,
                                      mainWindow->height/2 - femaleHighschoolBtnProxy->boundingRect().height()/2+70);
 
-    backBtnProxy = mainWindow->scene->addWidget(backBtn);
-    backBtnProxy->setPos(mainWindow->width/2 - backBtnProxy->boundingRect().width()/2,
-                         mainWindow->height/2 - backBtnProxy->boundingRect().height()/2+110);
+    femalePrimaryBtn->hide();
+    femaleIntermediateBtn->hide();
+    femaleHighschoolBtn->hide();
+    femaleKindergartenBtn->hide();
+
+
+    QObject::connect(femalePrimaryBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleIntermediateBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleHighschoolBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+    QObject::connect(femaleKindergartenBtn, &QPushButton::clicked, this, &female_grade::showFemaleOptionsWindow);
+}
+
+void female_grade::show_window()
+{
+    mainWindow->scene->setBackgroundBrush(
+        QBrush(QImage(":/Assets/Images/female_grade.jpg").scaledToWidth(mainWindow->width))
+    );
+
+    femalePrimaryBtn->show();
+    femaleIntermediateBtn->show();
+    femaleHighschoolBtn->show();
+    femaleKindergartenBtn->show();
+
+
+
+//    backBtnProxy = mainWindow->scene->addWidget(backBtn);
+//    backBtnProxy->setPos(mainWindow->width/2 - backBtnProxy->boundingRect().width()/2,
+//                         mainWindow->height/2 - backBtnProxy->boundingRect().height()/2+110);
+
+    mainWindow->backBtn->show();
+
+    QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, & female_grade::showGenderSelectionWindow);
 
 }
 

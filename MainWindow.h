@@ -19,9 +19,13 @@ class MainWindow : public QGraphicsView
 {
 public:
     MainWindow();
+    void initWindows ();
     int width, height;
     QGraphicsScene *scene;
     QScreen *screen;
+
+    QPushButton *backBtn;
+    QGraphicsProxyWidget *backBtnProxy;
 
     // Windows declarations
     Gender_Selection *gender_selection_window;

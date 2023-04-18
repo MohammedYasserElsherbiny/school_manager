@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     mainWindow = new MainWindow();
+    mainWindow->initWindows();
     mainWindow->show_window();
     mainWindow->show();
 

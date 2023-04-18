@@ -13,15 +13,44 @@ MainWindow::MainWindow()
 
     // Set scene properties
     scene->setSceneRect(0,0, width, height); // TODO: Improve screen size
-    scene->setBackgroundBrush(QBrush(QImage(":/Assets/Images/start.jpg").scaledToWidth(width)));
+
+
+
     setScene(scene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+
+
 
     // Btn Demo
     startBtn = new QPushButton();
     startBtn->setText("Start");
 
+    backBtn = new QPushButton();
+    backBtn->setText("Back");
+
+
+
+
+    startBtnProxy = scene->addWidget(startBtn);
+    startBtnProxy->setPos(width/2 - startBtnProxy->boundingRect().width()/2,
+                          height - startBtnProxy->boundingRect().height() - 20);
+
+    backBtnProxy = scene->addWidget(backBtn);
+    backBtnProxy->setPos(width/8 - backBtnProxy->boundingRect().width()+50,
+                          height - backBtnProxy->boundingRect().height() - 350);
+
+    backBtn->hide();
+
+
+    // create on click event listeners
+    QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);
+}
+
+void MainWindow::initWindows()
+{
     // Init Windows
     gender_selection_window = new Gender_Selection();
     female_grade_window = new female_grade();
@@ -29,31 +58,38 @@ MainWindow::MainWindow()
     female_options_window = new female_options();
     male_options_window = new male_options();
     document_viewer = new Document_Viewer();
-
-    // create on click event listeners
-    QObject::connect(startBtn, &QPushButton::clicked, this, &MainWindow::showGenderSelectionWindow);
 }
 
 void MainWindow::clearScene()
 {
     foreach (QGraphicsItem *item, scene->items()) {
-        scene->removeItem(item);
+        if(item != backBtnProxy)
+        item->hide();
+            //scene->removeItem(item);
     }
 }
 
 void MainWindow::show_window()
 {
-    startBtnProxy = scene->addWidget(startBtn);
-    startBtnProxy->setPos(width/2 - startBtnProxy->boundingRect().width()/2,
-                          height - startBtnProxy->boundingRect().height() - 20);
+
+
+    scene->setBackgroundBrush(QBrush(QImage(":/Assets/Images/start.jpg").scaledToWidth(width)));
+
+    startBtn->show();
+
+    backBtn->hide();
+
+//    backBtnProxy = scene->addWidget(backBtn);
+//    backBtnProxy->setPos(width/8 - backBtnProxy->boundingRect().width()+50,
+//                          height - backBtnProxy->boundingRect().height() - 350);
 }
 
 void MainWindow::showGenderSelectionWindow()
 {
     clearScene();
 
-//    gender_selection_window->show_window();
-    document_viewer->show_window();
+    gender_selection_window->show_window();
+    //document_viewer->show_window();
 }
 
 

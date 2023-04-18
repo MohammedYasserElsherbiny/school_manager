@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
 
-class female_options
+class female_options : public QGraphicsView
 {
 public:
     female_options();

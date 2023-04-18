@@ -7,7 +7,7 @@ Document_Viewer::Document_Viewer()
 {
     previous_document_btn = new QPushButton("<");
     next_document_btn = new QPushButton(">");
-    document_preview_btn = new QPushButton("Document");
+    document_preview_btn = new QPushButton("ملفات");
 
     load_file = new QPushButton("Load");
     remove_file = new QPushButton("Remove");

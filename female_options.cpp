@@ -1,5 +1,6 @@
 #include "female_options.h"
 #include <MainWindow.h>
+#include <female_grade.h>
 
 extern MainWindow * mainWindow;
 
@@ -23,15 +24,6 @@ female_options::female_options()
     femaleAdditionalBtn = new QPushButton("");
     femaleAdditionalBtn->setText("اضافي");
 
-}
-
-void female_options::show_window()
-{
-    mainWindow->scene->setBackgroundBrush(
-                    QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width))
-    );
-
-
 
     femalePlanBtnProxy = mainWindow->scene->addWidget(femalePlanBtn);
     femalePlanBtnProxy->setPos(mainWindow->width/2 - femalePlanBtnProxy->boundingRect().width()/2,
@@ -54,6 +46,37 @@ void female_options::show_window()
     femaleAdditionalBtnProxy = mainWindow->scene->addWidget(femaleAdditionalBtn);
     femaleAdditionalBtnProxy->setPos(mainWindow->width/2 - femaleAdditionalBtnProxy->boundingRect().width()/2,
                                      mainWindow->height/2 - femaleAdditionalBtnProxy->boundingRect().height()/2+110);
+
+
+    femalePlanBtnProxy->hide();
+    femaleCircularsBtnProxy->hide();
+    femaleReportsBtnProxy->hide();
+    femaleAdditionalBtnProxy->hide();
+
+
+    //QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, & female_options::showFemaleGradeWindow);
+
+
+}
+
+void female_options::show_window()
+{
+    mainWindow->scene->setBackgroundBrush(
+                    QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width))
+    );
+
+    femalePlanBtnProxy->show();
+    femaleCircularsBtnProxy->show();
+    femaleReportsBtnProxy->show();
+    femaleAdditionalBtnProxy->show();
+
+
+    mainWindow->backBtn->show();
+
+
+
+    QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, & female_options::showFemaleGradeWindow);
+
 }
 
 void female_options::showFemaleGradeWindow()
