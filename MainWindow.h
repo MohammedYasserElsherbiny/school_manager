@@ -14,6 +14,8 @@
 #include <female_options.h>
 #include <male_options.h>
 #include <document_viewer.h>
+#include <gradeselection.h>
+#include <gradeoptions.h>
 
 class MainWindow : public QGraphicsView
 {
@@ -34,6 +36,10 @@ public:
     male_options *male_options_window;
     female_options *female_options_window;
     Document_Viewer *document_viewer;
+    GradeSelection *grade_selection_window;
+    GradeOptions *grade_options_window;
+
+    QString gender;
 
     // Window functions
     void clearScene();

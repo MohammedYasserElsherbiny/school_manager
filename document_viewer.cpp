@@ -1,6 +1,7 @@
 #include "document_viewer.h"
 #include "MainWindow.h"
-
+#include <gradeoptions.h>
+#include <MainWindow.h>
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
@@ -16,9 +17,9 @@ Document_Viewer::Document_Viewer()
 
 void Document_Viewer::show_window()
 {
-    mainWindow->scene->setBackgroundBrush(
-        QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width)) // change background based on menu values
-    );
+//    mainWindow->scene->setBackgroundBrush(
+//        QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width)) // change background based on menu values
+//    );
 
     previous_document_proxy = mainWindow->scene->addWidget(previous_document_btn);
     previous_document_proxy->setMinimumWidth(25);
@@ -75,4 +76,16 @@ void Document_Viewer::show_window()
         mainWindow->width * 25 / 100 + bottomBtnWidth*2 + 12,
         mainWindow->height * 65 / 100 + 75 + 5
     );
+
+
+    mainWindow->backBtn->show();
+
+    QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &Document_Viewer::showGradeOptions);
+
+}
+
+void Document_Viewer::showGradeOptions()
+{
+    mainWindow->clearScene();
+    mainWindow->grade_options_window->show_window();
 }

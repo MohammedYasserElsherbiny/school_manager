@@ -51,18 +51,24 @@ void Gender_Selection::show_window()
 
 void Gender_Selection::showMaleGradeWindow()
 {
+    mainWindow->gender="male";
     mainWindow->clearScene();
-    mainWindow->male_grade_window->show_window();
+    mainWindow->grade_selection_window->show_window();
+//    mainWindow->male_grade_window->show_window();
 }
 
 void Gender_Selection::showFemaleGradeWindow()
 {
+
+    mainWindow->gender="female";
     mainWindow->clearScene();
-    mainWindow->female_grade_window->show_window();
+    mainWindow->grade_selection_window->show_window();
+//    mainWindow->female_grade_window->show_window();
 }
 
 void Gender_Selection::showMainWindow()
 {
+
     mainWindow->clearScene();
     mainWindow->show_window();
 }

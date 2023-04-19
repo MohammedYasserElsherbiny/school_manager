@@ -14,6 +14,8 @@ SOURCES += \
     female_grade.cpp \
     female_options.cpp \
     gender_selection.cpp \
+    gradeoptions.cpp \
+    gradeselection.cpp \
     main.cpp \
     male_grade.cpp \
     male_options.cpp
@@ -24,6 +26,8 @@ HEADERS += \
     female_grade.h \
     female_options.h \
     gender_selection.h \
+    gradeoptions.h \
+    gradeselection.h \
     male_grade.h \
     male_options.h
 

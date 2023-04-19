@@ -58,6 +58,8 @@ void MainWindow::initWindows()
     female_options_window = new female_options();
     male_options_window = new male_options();
     document_viewer = new Document_Viewer();
+    grade_options_window = new GradeOptions();
+    grade_selection_window = new GradeSelection();
 }
 
 void MainWindow::clearScene()
