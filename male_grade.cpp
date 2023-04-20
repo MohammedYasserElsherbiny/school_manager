@@ -1,4 +1,3 @@
-#include "male_grade.h"
 #include <MainWindow.h>
 
 

@@ -1,6 +1,3 @@
-#include "gender_selection.h"
-#include <male_grade.h>
-#include <female_grade.h>
 #include <MainWindow.h>
 
 extern MainWindow * mainWindow;

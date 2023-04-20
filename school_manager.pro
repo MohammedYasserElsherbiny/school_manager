@@ -11,25 +11,17 @@ CONFIG += c++17
 SOURCES += \
     MainWindow.cpp \
     document_viewer.cpp \
-    female_grade.cpp \
-    female_options.cpp \
     gender_selection.cpp \
     gradeoptions.cpp \
     gradeselection.cpp \
-    main.cpp \
-    male_grade.cpp \
-    male_options.cpp
+    main.cpp
 
 HEADERS += \
     MainWindow.h \
     document_viewer.h \
-    female_grade.h \
-    female_options.h \
     gender_selection.h \
     gradeoptions.h \
-    gradeselection.h \
-    male_grade.h \
-    male_options.h
+    gradeselection.h
 
 FORMS +=
 
