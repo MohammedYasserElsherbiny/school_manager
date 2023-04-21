@@ -2,6 +2,9 @@
 #include "MainWindow.h"
 #include <gradeoptions.h>
 #include <MainWindow.h>
+#include <QFileDialog>
+#include <QFile>
+#include <QString>
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
@@ -13,6 +16,8 @@ Document_Viewer::Document_Viewer()
     load_file = new QPushButton("Load");
     remove_file = new QPushButton("Remove");
     print_file = new QPushButton("Print");
+
+    QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
 }
 
 void Document_Viewer::show_window()
@@ -88,4 +93,31 @@ void Document_Viewer::showGradeOptions()
 {
     mainWindow->clearScene();
     mainWindow->grade_options_window->show_window();
+}
+
+//loading file demo
+
+void Document_Viewer::loadFile()
+{
+    storge_file= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+
+    QFile file(storge_file);
+
+    file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+
+    if(!file.open(QFile::WriteOnly | QFile::Text))
+    {
+        //file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+        QByteArray QbyteArray_file_name = file_name.toUtf8();
+        file.write(QByteArray(QbyteArray_file_name));
+        file.flush();
+    }
+
+//    if (file.open(QIODevice::WriteOnly)) {
+//        QTextStream out(&file); out << file_name;
+//        file.close();
+//      }
+
+    file.write(file_name.toUtf8());
+
 }

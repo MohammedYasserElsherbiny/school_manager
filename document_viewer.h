@@ -22,7 +22,10 @@ private:
     QGraphicsProxyWidget *document_preview_proxy;
     QGraphicsProxyWidget *load_file_proxy, *remove_file_proxy, *print_file_proxy;
 
+    QString file_name, storge_file ;
+
     void showGradeOptions();
+    void loadFile ();
 };
 
 #endif // DOCUMENT_VIEWER_H
