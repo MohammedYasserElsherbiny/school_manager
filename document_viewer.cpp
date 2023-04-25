@@ -5,6 +5,10 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QString>
+#include <QTextStream>
+#include <fstream>
+#include <ostream>
+using namespace std;
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
@@ -18,6 +22,12 @@ Document_Viewer::Document_Viewer()
     print_file = new QPushButton("Print");
 
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
+
+//    if(storge_file =="")
+//    {
+//        storge_file= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+//    }
+    file.open("C:/Users/Mohamed/Desktop/research/storge.txt",ios::app);
 }
 
 void Document_Viewer::show_window()
@@ -99,25 +109,63 @@ void Document_Viewer::showGradeOptions()
 
 void Document_Viewer::loadFile()
 {
-    storge_file= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
-    QFile file(storge_file);
 
-    file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
-    if(!file.open(QFile::WriteOnly | QFile::Text))
-    {
-        //file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
-        QByteArray QbyteArray_file_name = file_name.toUtf8();
-        file.write(QByteArray(QbyteArray_file_name));
-        file.flush();
-    }
+    //C:/Users/Mohamed/Desktop/research/storge.txt
 
-//    if (file.open(QIODevice::WriteOnly)) {
-//        QTextStream out(&file); out << file_name;
-//        file.close();
-//      }
+    file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
-    file.write(file_name.toUtf8());
+    file << file_name.toStdString() <<endl;
+
+
+
+//    if(!file.open(QFile::WriteOnly | QFile::Text))
+//    {
+//        //file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+//        QTextStream stream(&file);
+//        QByteArray QbyteArray_file_name = file_name.toUtf8();
+//        file.write(QByteArray(QbyteArray_file_name));
+//        stream<<'\n';
+//        file.flush();
+//    }
+
+//    //QString filename = "Data.txt";
+//       // QFile file(filename);
+////        if (file.open(QIODevice::ReadWrite)) {
+
+////            stream << "something" << endl;
+////        }
+
+////    if (file.open(QIODevice::WriteOnly)) {
+////        QTextStream out(&file); out << file_name;
+////        file.close();
+////      }
+
+//    file.write(file_name.toUtf8());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    QFile file( storge_file );
+//    if ( file.open(QIODevice::ReadWrite) )
+//    {
+//        QTextStream stream( &file );
+//        stream << "something" << Qt::endl;
+//    }
 
 }
+

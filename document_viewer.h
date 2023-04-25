@@ -4,7 +4,9 @@
 #include <QGraphicsView>
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
-
+#include <string>
+#include <fstream>
+using namespace std;
 
 class Document_Viewer : public QGraphicsView
 {
@@ -23,6 +25,8 @@ private:
     QGraphicsProxyWidget *load_file_proxy, *remove_file_proxy, *print_file_proxy;
 
     QString file_name, storge_file ;
+
+    fstream file;
 
     void showGradeOptions();
     void loadFile ();

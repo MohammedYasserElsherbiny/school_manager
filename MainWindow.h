@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QGraphicsView>
+#include <QFile>
 #include <QScreen>
 #include <QGuiApplication>
 #include <QGraphicsProxyWidget>
@@ -30,6 +31,8 @@ public:
     Document_Viewer *document_viewer;
     GradeSelection *grade_selection_window;
     GradeOptions *grade_options_window;
+
+
 
     QString gender;
 
