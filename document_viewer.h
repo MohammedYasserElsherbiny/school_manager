@@ -30,6 +30,9 @@ private:
 
     void showGradeOptions();
     void loadFile ();
+    string currentItem ();
+    string previousItem ();
+    string nextItem ();
 };
 
 #endif // DOCUMENT_VIEWER_H

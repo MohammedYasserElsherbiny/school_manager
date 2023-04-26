@@ -8,14 +8,29 @@
 #include <QTextStream>
 #include <fstream>
 #include <ostream>
+#include <istream>
+#include <algorithm>
+#include <filesystem>
 using namespace std;
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
 {
+
+    file.open("C:/Users/Mohamed/Desktop/research/storge.txt",ios::app);
+
+
     previous_document_btn = new QPushButton("<");
     next_document_btn = new QPushButton(">");
-    document_preview_btn = new QPushButton("ملفات");
+    document_preview_btn = new QPushButton();
+    if(std::filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
+    {
+        document_preview_btn->setText("لا يوجد ملفات");
+    }
+    else
+    {
+        document_preview_btn->setText(QString::fromStdString(currentItem()));
+    }
 
     load_file = new QPushButton("Load");
     remove_file = new QPushButton("Remove");
@@ -23,18 +38,11 @@ Document_Viewer::Document_Viewer()
 
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
 
-//    if(storge_file =="")
-//    {
-//        storge_file= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
-//    }
-    file.open("C:/Users/Mohamed/Desktop/research/storge.txt",ios::app);
+
 }
 
 void Document_Viewer::show_window()
 {
-//    mainWindow->scene->setBackgroundBrush(
-//        QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width)) // change background based on menu values
-//    );
 
     previous_document_proxy = mainWindow->scene->addWidget(previous_document_btn);
     previous_document_proxy->setMinimumWidth(25);
@@ -110,62 +118,56 @@ void Document_Viewer::showGradeOptions()
 void Document_Viewer::loadFile()
 {
 
-
-
-    //C:/Users/Mohamed/Desktop/research/storge.txt
-
     file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
     file << file_name.toStdString() <<endl;
 
+}
+
+string Document_Viewer::currentItem()
+{
+    string item,name;
+    bool dotFlag= false;
+
+    ifstream ifile("C:/Users/Mohamed/Desktop/research/storge.txt");
+    //ifile>>item;
+    getline(ifile, item);
+    int item_size=item.size();
+    for(int i=item_size-1;i>=0;i--)
+    {
+        if(item[i]=='.')
+        {
+            dotFlag= true;
+            continue;
+        }
+
+        if(!dotFlag)
+        {
+            continue;
+        }
+
+        if(item[i]=='/')
+        {
+            break;
+        }
 
 
-//    if(!file.open(QFile::WriteOnly | QFile::Text))
-//    {
-//        //file_name= QFileDialog::getOpenFileName(this,"اختر الملف","C://");
-//        QTextStream stream(&file);
-//        QByteArray QbyteArray_file_name = file_name.toUtf8();
-//        file.write(QByteArray(QbyteArray_file_name));
-//        stream<<'\n';
-//        file.flush();
-//    }
+        name.push_back(item[i]);
+    }
 
-//    //QString filename = "Data.txt";
-//       // QFile file(filename);
-////        if (file.open(QIODevice::ReadWrite)) {
+    reverse(name.begin(),name.end());
 
-////            stream << "something" << endl;
-////        }
+    return name;
 
-////    if (file.open(QIODevice::WriteOnly)) {
-////        QTextStream out(&file); out << file_name;
-////        file.close();
-////      }
+}
 
-//    file.write(file_name.toUtf8());
+string Document_Viewer::previousItem()
+{
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    QFile file( storge_file );
-//    if ( file.open(QIODevice::ReadWrite) )
-//    {
-//        QTextStream stream( &file );
-//        stream << "something" << Qt::endl;
-//    }
+string Document_Viewer::nextItem()
+{
 
 }
 
