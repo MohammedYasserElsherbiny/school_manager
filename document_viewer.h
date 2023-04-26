@@ -7,6 +7,8 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
+#include <QProcess>
 using namespace std;
 
 class Document_Viewer : public QGraphicsView
@@ -31,15 +33,21 @@ private:
 
     int place;
 
-    vector <string> names;
+    QProcess process;
+
+    //number of the line ,  path , name of the file , extention of the file
+    map <int,pair <string,pair<string,string>>> names;
 
     void showGradeOptions();
     void loadFile ();
     string currentItem ();
     void previousItem ();
+    string currentName ();
     void nextItem ();
     void fileNames ();
     void setMainItem ();
+    void removeFromFile ();
+    void fileOpener ();
 
 
 };

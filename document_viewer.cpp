@@ -11,6 +11,8 @@
 #include <istream>
 #include <algorithm>
 #include <filesystem>
+#include <QProcess>
+#include <QDir>
 using namespace std;
 extern MainWindow * mainWindow;
 
@@ -31,9 +33,12 @@ Document_Viewer::Document_Viewer()
     remove_file = new QPushButton("Remove");
     print_file = new QPushButton("Print");
 
+
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
     QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
     QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
+    QObject::connect(remove_file, &QPushButton::clicked, this, & Document_Viewer::removeFromFile);
+    QObject::connect(document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::fileOpener);
 
 
 }
@@ -111,7 +116,6 @@ void Document_Viewer::showGradeOptions()
     mainWindow->grade_options_window->show_window();
 }
 
-//loading file demo
 
 void Document_Viewer::loadFile()
 {
@@ -120,11 +124,19 @@ void Document_Viewer::loadFile()
 
     file << file_name.toStdString() <<endl;
 
+    fileNames();
+    setMainItem();
+
 }
 
 string Document_Viewer::currentItem()
 {
-    return names[place%names.size()];
+    return names[place%names.size()].first;
+}
+
+string Document_Viewer::currentName()
+{
+    return names[place%names.size()].second.first;
 }
 
 void Document_Viewer::previousItem()
@@ -141,55 +153,153 @@ void Document_Viewer::nextItem()
 
 void Document_Viewer::setMainItem()
 {
-    if(std::filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
+    if(filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
     {
         document_preview_btn->setText("لا يوجد ملفات");
     }
     else
     {
-        document_preview_btn->setText(QString::fromStdString(currentItem()));
+        document_preview_btn->setText(QString::fromStdString(currentName()));
     }
+
+    if(names[place%names.size()].second.second=="txt")
+    {
+        //QPushButton *button = new QPushButton;
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
+        //document_preview_btn->setIconSize(QSize(65, 65));
+
+        //document_preview_btn->setIcon(":/Assets/Images/images.png");
+    }
+    else if((names[place%names.size()].second.second=="bmp"))
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+}
+
+void Document_Viewer::removeFromFile()
+{
+
+    string line,emptyString="";
+    string path="C:/Users/Mohamed/Desktop/research/storge.txt";
+    string eraseLine=currentItem();
+    ifstream fin;
+
+    fin.open(path);
+    // contents of path must be copied to a temp file then
+    // renamed back to the path file
+    ofstream temp;
+    temp.open("C:/Users/Mohamed/Desktop/research/storge.txt");
+
+    while (getline(fin,line))
+    {
+
+        //line.replace(line.find(eraseLine),eraseLine.length(),"");
+
+        if(line==eraseLine)
+        {
+            line.swap(emptyString);
+        }
+
+         auto position = line.find(eraseLine);
+
+        if (position != string::npos) {
+            line.replace(line.find(eraseLine), eraseLine.length(), "");
+        }
+        if (!line.empty())
+            temp << line << endl;
+
+
+    }
+
+
+
+    temp.close();
+    fin.close();
+
+    // required conversion for remove and rename functions
+    remove("storge.txt");
+    rename("test.txt","storge.txt");
+
+
+
+//    string deleteline;
+//    string line;
+
+//    ifstream fin;
+//    fin.open("example.txt");
+//    ofstream temp;
+//    temp.open("temp.txt");
+//    cout << "Which line do you want to remove? ";
+//    cin >> deleteline;
+
+
+
+//        while (getline(fin,line))
+//    {
+//        line.replace(line.find(eraseLine),eraseLine.length(),"");
+//        temp << line << endl;
+
+//    }
+
+//    temp.close();
+//    fin.close();
+//    remove("example.txt");
+//    rename("temp.txt","example.txt");
+
+}
+
+void Document_Viewer::fileOpener()
+{
+    string PATH=names[place%names.size()].first;
+    PATH="\""+PATH+"\"";
+    const char *c=(PATH).c_str();
+    system(c);
 }
 
 void Document_Viewer::fileNames()
 {
 
-    string item;
+    string path;
+    int tempPlace=0;
     ifstream ifile("C:/Users/Mohamed/Desktop/research/storge.txt");
-    while(getline(ifile, item))
+    while(getline(ifile, path))
     {
+
         string name;
+        string exten;
         bool dotFlag= false;
-        int item_size=item.size();
-        for(int i=item_size-1;i>=0;i--)
+        int path_size=path.size();
+        for(int i=path_size-1;i>=0;i--)
         {
-            if(item[i]=='.')
+            if(path[i]=='.')
             {
                 dotFlag= true;
+                reverse(exten.begin(),exten.end());
                 continue;
             }
 
             if(!dotFlag)
             {
+                exten.push_back(path[i]);
                 continue;
             }
 
-            if(item[i]=='/')
+            if(path[i]=='/')
             {
                 break;
             }
 
-
-            name.push_back(item[i]);
+            name.push_back(path[i]);
         }
 
         reverse(name.begin(),name.end());
 
-        names.push_back(name);
+        names[tempPlace].first=path;
+        names[tempPlace].second.first=name;
+        names[tempPlace].second.second=exten;
+        tempPlace++;
     }
-
-
-
 }
 
 
