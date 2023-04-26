@@ -19,24 +19,21 @@ Document_Viewer::Document_Viewer()
 
     file.open("C:/Users/Mohamed/Desktop/research/storge.txt",ios::app);
 
+    fileNames();
+    place =0;
 
     previous_document_btn = new QPushButton("<");
     next_document_btn = new QPushButton(">");
     document_preview_btn = new QPushButton();
-    if(std::filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
-    {
-        document_preview_btn->setText("لا يوجد ملفات");
-    }
-    else
-    {
-        document_preview_btn->setText(QString::fromStdString(currentItem()));
-    }
+    setMainItem();
 
     load_file = new QPushButton("Load");
     remove_file = new QPushButton("Remove");
     print_file = new QPushButton("Print");
 
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
+    QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
+    QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
 
 
 }
@@ -105,6 +102,7 @@ void Document_Viewer::show_window()
 
     QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &Document_Viewer::showGradeOptions);
 
+
 }
 
 void Document_Viewer::showGradeOptions()
@@ -126,48 +124,73 @@ void Document_Viewer::loadFile()
 
 string Document_Viewer::currentItem()
 {
-    string item,name;
-    bool dotFlag= false;
+    return names[place%names.size()];
+}
 
-    ifstream ifile("C:/Users/Mohamed/Desktop/research/storge.txt");
-    //ifile>>item;
-    getline(ifile, item);
-    int item_size=item.size();
-    for(int i=item_size-1;i>=0;i--)
+void Document_Viewer::previousItem()
+{
+    place--;
+    setMainItem();
+}
+
+void Document_Viewer::nextItem()
+{
+    place++;
+    setMainItem();
+}
+
+void Document_Viewer::setMainItem()
+{
+    if(std::filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
     {
-        if(item[i]=='.')
+        document_preview_btn->setText("لا يوجد ملفات");
+    }
+    else
+    {
+        document_preview_btn->setText(QString::fromStdString(currentItem()));
+    }
+}
+
+void Document_Viewer::fileNames()
+{
+
+    string item;
+    ifstream ifile("C:/Users/Mohamed/Desktop/research/storge.txt");
+    while(getline(ifile, item))
+    {
+        string name;
+        bool dotFlag= false;
+        int item_size=item.size();
+        for(int i=item_size-1;i>=0;i--)
         {
-            dotFlag= true;
-            continue;
+            if(item[i]=='.')
+            {
+                dotFlag= true;
+                continue;
+            }
+
+            if(!dotFlag)
+            {
+                continue;
+            }
+
+            if(item[i]=='/')
+            {
+                break;
+            }
+
+
+            name.push_back(item[i]);
         }
 
-        if(!dotFlag)
-        {
-            continue;
-        }
+        reverse(name.begin(),name.end());
 
-        if(item[i]=='/')
-        {
-            break;
-        }
-
-
-        name.push_back(item[i]);
+        names.push_back(name);
     }
 
-    reverse(name.begin(),name.end());
 
-    return name;
 
 }
 
-string Document_Viewer::previousItem()
-{
 
-}
-
-string Document_Viewer::nextItem()
-{
-
-}
 

@@ -6,6 +6,7 @@
 #include <QGraphicsProxyWidget>
 #include <string>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 class Document_Viewer : public QGraphicsView
@@ -28,11 +29,19 @@ private:
 
     fstream file;
 
+    int place;
+
+    vector <string> names;
+
     void showGradeOptions();
     void loadFile ();
     string currentItem ();
-    string previousItem ();
-    string nextItem ();
+    void previousItem ();
+    void nextItem ();
+    void fileNames ();
+    void setMainItem ();
+
+
 };
 
 #endif // DOCUMENT_VIEWER_H
