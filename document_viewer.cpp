@@ -164,15 +164,27 @@ void Document_Viewer::setMainItem()
 
     if(names[place%names.size()].second.second=="txt")
     {
-        //QPushButton *button = new QPushButton;
         document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
-        //document_preview_btn->setIconSize(QSize(65, 65));
-
-        //document_preview_btn->setIcon(":/Assets/Images/images.png");
+        document_preview_btn->setIconSize(QSize(65, 65));
     }
-    else if((names[place%names.size()].second.second=="bmp"))
+    else if((names[place%names.size()].second.second=="bmp")||(names[place%names.size()].second.second=="jpg")||(names[place%names.size()].second.second=="png"))
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="xlsx")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="pptx")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="docx")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
 }
