@@ -41,10 +41,10 @@ GradeSelection::GradeSelection()
     KinderBtn->hide();
 
 
-    QObject::connect(PriBtn, &QPushButton::clicked, this, &GradeSelection::showGradeOptions);
-    QObject::connect(InterBtn, &QPushButton::clicked, this, &GradeSelection::showGradeOptions);
-    QObject::connect(HighBtn, &QPushButton::clicked, this, &GradeSelection::showGradeOptions);
-    QObject::connect(KinderBtn, &QPushButton::clicked, this, &GradeSelection::showGradeOptions);
+    QObject::connect(PriBtn, &QPushButton::clicked, this, &GradeSelection::setGradePri);
+    QObject::connect(InterBtn, &QPushButton::clicked, this, &GradeSelection::setGradeInter);
+    QObject::connect(HighBtn, &QPushButton::clicked, this, &GradeSelection::setGradeHigh);
+    QObject::connect(KinderBtn, &QPushButton::clicked, this, &GradeSelection::setGradeKinder);
 }
 
 void GradeSelection::show_window()
@@ -85,4 +85,28 @@ void GradeSelection::showGradeOptions()
 {
     mainWindow->clearScene();
     mainWindow->grade_options_window->show_window();
+}
+
+void GradeSelection::setGradePri()
+{
+    mainWindow->grade= "Pri";
+    showGradeOptions();
+}
+
+void GradeSelection::setGradeInter()
+{
+    mainWindow->grade= "Inter";
+    showGradeOptions();
+}
+
+void GradeSelection::setGradeHigh()
+{
+    mainWindow->grade="High";
+    showGradeOptions();
+}
+
+void GradeSelection::setGradeKinder()
+{
+    mainWindow->grade="Kinder";
+    showGradeOptions();
 }

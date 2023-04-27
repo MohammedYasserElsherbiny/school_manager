@@ -22,7 +22,10 @@ private:
 
     void showGenderSelectionWindow ();
     void showGradeOptions ();
-
+    void setGradePri ();
+    void setGradeInter ();
+    void setGradeHigh ();
+    void setGradeKinder ();
 };
 
 #endif // GRADESELECTION_H

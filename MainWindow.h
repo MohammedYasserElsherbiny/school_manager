@@ -34,7 +34,7 @@ public:
 
 
 
-    QString gender;
+    QString gender,grade,option;
 
     // Window functions
     void clearScene();
