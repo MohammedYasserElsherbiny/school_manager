@@ -20,6 +20,10 @@ private:
 
     void showGradeSelection ();
     void showDocumentViewer ();
+    void setOptionPlan ();
+    void setOptionCircular ();
+    void setOptionReports ();
+    void setOptionAdditional ();
 };
 
 #endif // GRADEOPTIONS_H

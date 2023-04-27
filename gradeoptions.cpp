@@ -49,10 +49,10 @@ GradeOptions::GradeOptions()
     reportsBtn->hide();
     additionalBtn->hide();
 
-    QObject::connect(planBtn, &QPushButton::clicked, this, &GradeOptions::showDocumentViewer);
-    QObject::connect(circularsBtn, &QPushButton::clicked, this, &GradeOptions::showDocumentViewer);
-    QObject::connect(reportsBtn, &QPushButton::clicked, this, &GradeOptions::showDocumentViewer);
-    QObject::connect(additionalBtn, &QPushButton::clicked, this, &GradeOptions::showDocumentViewer);
+    QObject::connect(planBtn, &QPushButton::clicked, this, &GradeOptions::setOptionPlan);
+    QObject::connect(circularsBtn, &QPushButton::clicked, this, &GradeOptions::setOptionCircular);
+    QObject::connect(reportsBtn, &QPushButton::clicked, this, &GradeOptions::setOptionReports);
+    QObject::connect(additionalBtn, &QPushButton::clicked, this, &GradeOptions::setOptionAdditional);
 }
 
 void GradeOptions::show_window()
@@ -92,4 +92,28 @@ void GradeOptions::showDocumentViewer()
 {
     mainWindow->clearScene();
     mainWindow->document_viewer->show_window();
+}
+
+void GradeOptions::setOptionPlan()
+{
+    mainWindow->option="Plan";
+    showDocumentViewer();
+}
+
+void GradeOptions::setOptionCircular()
+{
+    mainWindow->option="Circular";
+    showDocumentViewer();
+}
+
+void GradeOptions::setOptionReports()
+{
+    mainWindow->option="Reports";
+    showDocumentViewer();
+}
+
+void GradeOptions::setOptionAdditional()
+{
+    mainWindow->option="Additional";
+    showDocumentViewer();
 }
