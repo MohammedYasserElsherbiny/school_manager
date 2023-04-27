@@ -11,10 +11,10 @@
 #include <istream>
 #include <algorithm>
 #include <filesystem>
-#include <QProcess>
-#include <QDir>
-#include <stdio.h>
-#include <stdlib.h>
+//#include <QProcess>
+//#include <QDir>
+//#include <stdio.h>
+//#include <stdlib.h>
 //#include <windows.h>
 //#include <winuser.h>
 using namespace std;
@@ -23,9 +23,9 @@ extern MainWindow * mainWindow;
 Document_Viewer::Document_Viewer()
 {
 
-    file.open("C:/Users/Mohamed/Desktop/research/storge.txt",ios::app);
-
-    fileNames();
+    file.open("storge.txt",ios::app);
+    if(!filesystem::is_empty("storge.txt"))
+        fileNames();
     place =0;
 
     previous_document_btn = new QPushButton("<");
@@ -123,6 +123,7 @@ void Document_Viewer::showGradeOptions()
 
 void Document_Viewer::loadFile()
 {
+    file.open("storge.txt",ios::app);
 
     file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
@@ -157,9 +158,10 @@ void Document_Viewer::nextItem()
 
 void Document_Viewer::setMainItem()
 {
-    if(filesystem::is_empty("C:/Users/Mohamed/Desktop/research/storge.txt"))
+    if(filesystem::is_empty("storge.txt"))
     {
         document_preview_btn->setText("لا يوجد ملفات");
+        return ;
     }
     else
     {
@@ -197,76 +199,39 @@ void Document_Viewer::removeFromFile()
 {
 
     string line,emptyString="";
-    string path="C:/Users/Mohamed/Desktop/research/storge.txt";
+    string path="storge.txt",tempPath="temp.txt";
     string eraseLine=currentItem();
     ifstream fin;
 
     fin.open(path);
-    // contents of path must be copied to a temp file then
-    // renamed back to the path file
+
     ofstream temp;
-    temp.open("C:/Users/Mohamed/Desktop/research/storge.txt");
+    temp.open(tempPath, ios::out|ios::binary);
 
-    while (getline(fin,line))
+    while (getline(fin, line))
     {
-
-        //line.replace(line.find(eraseLine),eraseLine.length(),"");
-
-        if(line==eraseLine)
-        {
-            line.swap(emptyString);
-        }
-
-         auto position = line.find(eraseLine);
-
-        if (position != string::npos) {
-            line.replace(line.find(eraseLine), eraseLine.length(), "");
-        }
-        if (!line.empty())
-            temp << line << endl;
-
-
+            if (line != eraseLine)
+                temp << line << std::endl;
     }
-
 
 
     temp.close();
     fin.close();
 
-    // required conversion for remove and rename functions
-    remove("storge.txt");
-    rename("test.txt","storge.txt");
+
+    const char * p = path.c_str();
+    const char * tp = tempPath.c_str();
+    remove(path.c_str());
+    rename(tempPath.c_str(), path.c_str());
 
 
-
-//    string deleteline;
-//    string line;
-
-//    ifstream fin;
-//    fin.open("example.txt");
-//    ofstream temp;
-//    temp.open("temp.txt");
-//    cout << "Which line do you want to remove? ";
-//    cin >> deleteline;
-
-
-
-//        while (getline(fin,line))
-//    {
-//        line.replace(line.find(eraseLine),eraseLine.length(),"");
-//        temp << line << endl;
-
-//    }
-
-//    temp.close();
-//    fin.close();
-//    remove("example.txt");
-//    rename("temp.txt","example.txt");
 
 }
 
 void Document_Viewer::fileOpener()
 {
+    if(filesystem::is_empty("storge.txt"))
+            return ;
     string PATH=names[place%names.size()].first;
     PATH="\""+PATH+"\"";
     const char *c=(PATH).c_str();
@@ -275,12 +240,17 @@ void Document_Viewer::fileOpener()
     //SW_HIDE
 }
 
+void Document_Viewer::changeTheFiles()
+{
+
+}
+
 void Document_Viewer::fileNames()
 {
 
     string path;
     int tempPlace=0;
-    ifstream ifile("C:/Users/Mohamed/Desktop/research/storge.txt");
+    ifstream ifile("storge.txt");
     while(getline(ifile, path))
     {
 
@@ -318,6 +288,7 @@ void Document_Viewer::fileNames()
         names[tempPlace].second.second=exten;
         tempPlace++;
     }
+    file.close ();
 }
 
 

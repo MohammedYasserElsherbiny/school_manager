@@ -36,7 +36,7 @@ private:
     QProcess process;
 
     //number of the line ,  path , name of the file , extention of the file
-    map <int,pair <string,pair<string,string>>> names;
+    map < int , pair < string , pair < string , string > > > names;
 
     void showGradeOptions();
     void loadFile ();
@@ -48,6 +48,7 @@ private:
     void setMainItem ();
     void removeFromFile ();
     void fileOpener ();
+    void changeTheFiles ();
 
 
 };
