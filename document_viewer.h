@@ -48,7 +48,7 @@ private:
     void setMainItem ();
     void removeFromFile ();
     void fileOpener ();
-    void changeTheFiles ();
+    void removeItem ();
 
 
 };

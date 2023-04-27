@@ -244,10 +244,9 @@ void Document_Viewer::fileOpener()
 
 void Document_Viewer::removeItem()
 {
-    string PATH=names[place%names.size()].first;
-    PATH="\""+PATH+"\"";
-    const char *c=(PATH).c_str();
-    int x= fchdir(c);
+    //int x=chdir(str.c_str()); return -1 error , return 0 goooooooood
+    
+    string str= names[place%names.size()].first+names[place%names.s
 
 }
 
