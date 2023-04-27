@@ -244,10 +244,50 @@ void Document_Viewer::fileOpener()
 
 void Document_Viewer::removeItem()
 {
-    string PATH=names[place%names.size()].first;
-    PATH="\""+PATH+"\"";
-    const char *c=(PATH).c_str();
-    int x= fchdir(c);
+    //int x=chdir(str.c_str()); return -1 error , return 0 goooooooood
+
+/*
+    example:
+    1-E:
+    2-cd Qt prog\school_manager
+    3-del storge.txt
+
+    system("command1; command2; command3");
+*/
+
+    string disk,dir,itemName;
+    bool flag=false;
+    disk.push_back(names[place%names.size()].first[0]);
+    disk.push_back(names[place%names.size()].first[1]);
+    for(int i=names[place%names.size()].first.size()-1;i>=0;i--)
+    {
+        string temp=names[place%names.size()].first;
+        if(i==2)
+        {
+            break;
+        }
+        if(flag)
+        {
+            dir.push_back(temp[i]);
+        }
+
+        if(temp[i]=='/')
+        {
+            flag=true;
+        }
+        else
+        {
+            continue;
+        }
+
+    }
+    reverse(dir.begin(),dir.end());
+    dir="cd "+dir;
+    itemName="del "+names[place%names.size()].second.first+"."+names[place%names.size()].second.second;
+    dir="\""+dir+"\"";
+    itemName="\""+itemName+"\"";
+    disk="\""+disk+"\"";
+    system("disk; dir; itemName");
 
 }
 
