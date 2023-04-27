@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <unistd.h>
+#include <cstdio>
 //#include <QProcess>
 //#include <QDir>
 //#include <stdio.h>
@@ -128,7 +129,7 @@ void Document_Viewer::loadFile()
 
     file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
-    file << file_name.toStdString() <<endl;
+    file << file_name.toStdString()<<endl ;
 
     fileNames();
     setMainItem();
@@ -199,7 +200,7 @@ void Document_Viewer::setMainItem()
 void Document_Viewer::removeFromFile()
 {
 
-    removeItem();
+    //removeItem();
     string line,emptyString="";
     string path="storge.txt",tempPath="temp.txt";
     string eraseLine=currentItem();
@@ -226,6 +227,8 @@ void Document_Viewer::removeFromFile()
     remove(path.c_str());
     rename(tempPath.c_str(), path.c_str());
 
+    const char *ttemp=(names[place%names.size()].first).c_str();
+    int s=remove(ttemp);
 
     names.erase(place%names.size());
 }
@@ -282,12 +285,20 @@ void Document_Viewer::removeItem()
 
     }
     reverse(dir.begin(),dir.end());
-    dir="cd "+dir;
-    itemName="del "+names[place%names.size()].second.first+"."+names[place%names.size()].second.second;
-    dir="\""+dir+"\"";
-    itemName="\""+itemName+"\"";
-    disk="\""+disk+"\"";
-    system("disk; dir; itemName");
+    const char *temp=(names[place%names.size()].first).c_str();
+    int s=remove(temp);
+
+//    dir="cd "+dir;
+//    itemName="del "+names[place%names.size()].second.first+"."+names[place%names.size()].second.second;
+//    dir="\""+dir+"\"";
+//    itemName="\""+itemName+"\"";
+//    disk="\""+disk+"\"";
+//    const char *cDir=dir.c_str();
+//    const char *cDisk=disk.c_str();
+//    const char *cItemName=itemName.c_str();
+//    system(cDisk);
+//    system(cDir);
+//    system(cItemName);
 
 }
 
