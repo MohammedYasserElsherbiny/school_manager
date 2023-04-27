@@ -13,6 +13,10 @@
 #include <filesystem>
 #include <QProcess>
 #include <QDir>
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+//#include <winuser.h>
 using namespace std;
 extern MainWindow * mainWindow;
 
@@ -266,7 +270,9 @@ void Document_Viewer::fileOpener()
     string PATH=names[place%names.size()].first;
     PATH="\""+PATH+"\"";
     const char *c=(PATH).c_str();
-    system(c);
+    //system(c);
+    WinExec(c,false );
+    //SW_HIDE
 }
 
 void Document_Viewer::fileNames()
