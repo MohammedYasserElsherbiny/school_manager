@@ -8,8 +8,8 @@ MainWindow::MainWindow()
     // Get Display Resolution
     screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
-    width = 900; // screenGeometry.width()
-    height = 600; // screenGeometry.height()
+    width = 600; // screenGeometry.width()
+    height = 400; // screenGeometry.height()
 
     // Set scene properties
     scene->setSceneRect(0,0, width, height); // TODO: Improve screen size

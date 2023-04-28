@@ -163,6 +163,7 @@ void Document_Viewer::setMainItem()
     if(filesystem::is_empty("storge.txt"))
     {
         document_preview_btn->setText("لا يوجد ملفات");
+        document_preview_btn->setIcon(QIcon());
         return ;
     }
     else
@@ -231,6 +232,8 @@ void Document_Viewer::removeFromFile()
     int s=remove(ttemp);
 
     names.erase(place%names.size());
+
+    setMainItem();
 }
 
 void Document_Viewer::fileOpener()
@@ -247,16 +250,7 @@ void Document_Viewer::fileOpener()
 
 void Document_Viewer::removeItem()
 {
-    //int x=chdir(str.c_str()); return -1 error , return 0 goooooooood
 
-/*
-    example:
-    1-E:
-    2-cd Qt prog\school_manager
-    3-del storge.txt
-
-    system("command1; command2; command3");
-*/
 
     string disk,dir,itemName;
     bool flag=false;
@@ -287,19 +281,6 @@ void Document_Viewer::removeItem()
     reverse(dir.begin(),dir.end());
     const char *temp=(names[place%names.size()].first).c_str();
     int s=remove(temp);
-
-//    dir="cd "+dir;
-//    itemName="del "+names[place%names.size()].second.first+"."+names[place%names.size()].second.second;
-//    dir="\""+dir+"\"";
-//    itemName="\""+itemName+"\"";
-//    disk="\""+disk+"\"";
-//    const char *cDir=dir.c_str();
-//    const char *cDisk=disk.c_str();
-//    const char *cItemName=itemName.c_str();
-//    system(cDisk);
-//    system(cDir);
-//    system(cItemName);
-
 }
 
 void Document_Viewer::fileNames()
