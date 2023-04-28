@@ -24,7 +24,7 @@ extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
 {
-
+    filesystem::create_directories("C:/school_manager");
     file.open("storge.txt",ios::app);
     if(!filesystem::is_empty("storge.txt"))
         fileNames();
@@ -35,9 +35,9 @@ Document_Viewer::Document_Viewer()
     document_preview_btn = new QPushButton();
     setMainItem();
 
-    load_file = new QPushButton("Load");
-    remove_file = new QPushButton("Remove");
-    print_file = new QPushButton("Print");
+    load_file = new QPushButton("اضافة");
+    remove_file = new QPushButton("حذف");
+    print_file = new QPushButton("طباعة");
 
 
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
@@ -248,40 +248,6 @@ void Document_Viewer::fileOpener()
     //SW_HIDE
 }
 
-void Document_Viewer::removeItem()
-{
-
-
-    string disk,dir,itemName;
-    bool flag=false;
-    disk.push_back(names[place%names.size()].first[0]);
-    disk.push_back(names[place%names.size()].first[1]);
-    for(int i=names[place%names.size()].first.size()-1;i>=0;i--)
-    {
-        string temp=names[place%names.size()].first;
-        if(i==2)
-        {
-            break;
-        }
-        if(flag)
-        {
-            dir.push_back(temp[i]);
-        }
-
-        if(temp[i]=='/')
-        {
-            flag=true;
-        }
-        else
-        {
-            continue;
-        }
-
-    }
-    reverse(dir.begin(),dir.end());
-    const char *temp=(names[place%names.size()].first).c_str();
-    int s=remove(temp);
-}
 
 void Document_Viewer::fileNames()
 {

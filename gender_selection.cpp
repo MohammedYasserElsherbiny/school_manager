@@ -7,10 +7,10 @@ Gender_Selection::Gender_Selection()
 
 
     maleBtn = new QPushButton("");
-    maleBtn->setText("Male");
+    maleBtn->setText("بنين");
 
     femaleBtn = new QPushButton("");
-    femaleBtn->setText("female");
+    femaleBtn->setText("بنات");
 
 
 
@@ -48,7 +48,7 @@ void Gender_Selection::show_window()
 
 void Gender_Selection::showMaleGradeWindow()
 {
-    mainWindow->gender="male";
+    mainWindow->gender="بنين";
     mainWindow->clearScene();
     mainWindow->grade_selection_window->show_window();
 }
@@ -56,7 +56,7 @@ void Gender_Selection::showMaleGradeWindow()
 void Gender_Selection::showFemaleGradeWindow()
 {
 
-    mainWindow->gender="female";
+    mainWindow->gender="بنات";
     mainWindow->clearScene();
     mainWindow->grade_selection_window->show_window();
 }

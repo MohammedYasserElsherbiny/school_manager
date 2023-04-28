@@ -8,8 +8,8 @@ MainWindow::MainWindow()
     // Get Display Resolution
     screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
-    width = 600; // screenGeometry.width()
-    height = 400; // screenGeometry.height()
+    width = 900; // screenGeometry.width()
+    height = 600; // screenGeometry.height()
 
     // Set scene properties
     scene->setSceneRect(0,0, width, height); // TODO: Improve screen size
@@ -26,10 +26,10 @@ MainWindow::MainWindow()
 
     // Btn Demo
     startBtn = new QPushButton();
-    startBtn->setText("Start");
+    startBtn->setText("ابدا");
 
     backBtn = new QPushButton();
-    backBtn->setText("Back");
+    backBtn->setText("عوده");
 
 
 
@@ -77,9 +77,6 @@ void MainWindow::show_window()
 
     backBtn->hide();
 
-//    backBtnProxy = scene->addWidget(backBtn);
-//    backBtnProxy->setPos(width/8 - backBtnProxy->boundingRect().width()+50,
-//                          height - backBtnProxy->boundingRect().height() - 350);
 }
 
 void MainWindow::showGenderSelectionWindow()
@@ -87,7 +84,7 @@ void MainWindow::showGenderSelectionWindow()
     clearScene();
 
     gender_selection_window->show_window();
-    //document_viewer->show_window();
+
 }
 
 

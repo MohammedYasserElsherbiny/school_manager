@@ -57,7 +57,7 @@ GradeOptions::GradeOptions()
 
 void GradeOptions::show_window()
 {
-    if(mainWindow->gender=="male")
+    if(mainWindow->gender=="بنين")
     {
         mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
@@ -65,7 +65,7 @@ void GradeOptions::show_window()
                     );
 
     }
-    else if(mainWindow->gender=="female")
+    else if(mainWindow->gender=="بنات")
     {
         mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
@@ -96,24 +96,24 @@ void GradeOptions::showDocumentViewer()
 
 void GradeOptions::setOptionPlan()
 {
-    mainWindow->option="Plan";
+    mainWindow->option="الخطة والتسجيل";
     showDocumentViewer();
 }
 
 void GradeOptions::setOptionCircular()
 {
-    mainWindow->option="Circular";
+    mainWindow->option="التعاميم";
     showDocumentViewer();
 }
 
 void GradeOptions::setOptionReports()
 {
-    mainWindow->option="Reports";
+    mainWindow->option="الشواهد والتقارير";
     showDocumentViewer();
 }
 
 void GradeOptions::setOptionAdditional()
 {
-    mainWindow->option="Additional";
+    mainWindow->option="اضافي";
     showDocumentViewer();
 }

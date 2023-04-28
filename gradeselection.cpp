@@ -7,16 +7,16 @@ extern MainWindow * mainWindow;
 GradeSelection::GradeSelection()
 {
     PriBtn = new QPushButton("");
-    PriBtn->setText("مرحلة الروضة");
+    PriBtn->setText("مرحلة الابتدائي");
 
     InterBtn = new QPushButton("");
-    InterBtn->setText("مرحلة الابتدائي");
+    InterBtn->setText("مرحلة المتوسط");
 
     HighBtn = new QPushButton("");
-    HighBtn->setText("مرحلة المتوسط");
+    HighBtn->setText("مرحلة الثانوي");
 
     KinderBtn = new QPushButton("");
-    KinderBtn->setText("مرحلة الثانوي");
+    KinderBtn->setText("مرحلة الروضة");
 
 
     PriBtnProxy = mainWindow->scene->addWidget(PriBtn);
@@ -49,7 +49,7 @@ GradeSelection::GradeSelection()
 
 void GradeSelection::show_window()
 {
-    if(mainWindow->gender=="male")
+    if(mainWindow->gender=="بنين")
     {
         mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
@@ -57,7 +57,7 @@ void GradeSelection::show_window()
         );
 
     }
-    else if(mainWindow->gender=="female")
+    else if(mainWindow->gender=="بنات")
     {
         mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
@@ -89,24 +89,24 @@ void GradeSelection::showGradeOptions()
 
 void GradeSelection::setGradePri()
 {
-    mainWindow->grade= "Pri";
+    mainWindow->grade= "مرحلة الابتدائي";
     showGradeOptions();
 }
 
 void GradeSelection::setGradeInter()
 {
-    mainWindow->grade= "Inter";
+    mainWindow->grade= "مرحلة المتوسط";
     showGradeOptions();
 }
 
 void GradeSelection::setGradeHigh()
 {
-    mainWindow->grade="High";
+    mainWindow->grade="مرحلة الثانوي";
     showGradeOptions();
 }
 
 void GradeSelection::setGradeKinder()
 {
-    mainWindow->grade="Kinder";
+    mainWindow->grade="مرحلة الروضة";
     showGradeOptions();
 }
