@@ -13,6 +13,7 @@
 #include <document_viewer.h>
 #include <gradeselection.h>
 #include <gradeoptions.h>
+#include <string>
 
 class MainWindow : public QGraphicsView
 {
@@ -34,7 +35,7 @@ public:
 
 
 
-    QString gender,grade,option;
+    string gender,grade,option;
 
     // Window functions
     void clearScene();
