@@ -131,7 +131,7 @@ void Document_Viewer::loadFile()
 
     file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
 
-    file << file_name.toStdString()<<endl ;
+    storge_files[storge_file_names[setFileNum()]] << file_name.toStdString()<<endl ;
 
     fileNames();
     setMainItem();
@@ -475,7 +475,7 @@ int Document_Viewer::setFileNum()
         }
         else if(gra=="مرحلة المتوسط")
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 4;
             }
@@ -483,7 +483,7 @@ int Document_Viewer::setFileNum()
             {
                 return 5;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 6;
             }
@@ -494,7 +494,7 @@ int Document_Viewer::setFileNum()
         }
         else if(gra=="مرحلة الروضة")
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 8;
             }
@@ -502,7 +502,7 @@ int Document_Viewer::setFileNum()
             {
                 return 9;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 10;
             }
@@ -513,7 +513,7 @@ int Document_Viewer::setFileNum()
         }
         else
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 12;
             }
@@ -521,7 +521,7 @@ int Document_Viewer::setFileNum()
             {
                 return 13;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 14;
             }
@@ -535,7 +535,7 @@ int Document_Viewer::setFileNum()
     {
         if(gra=="مرحلة الثانوي")
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 16;
             }
@@ -543,7 +543,7 @@ int Document_Viewer::setFileNum()
             {
                 return 17;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 18;
             }
@@ -554,7 +554,7 @@ int Document_Viewer::setFileNum()
         }
         else if(gra=="مرحلة المتوسط")
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 20;
             }
@@ -562,7 +562,7 @@ int Document_Viewer::setFileNum()
             {
                 return 21;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 22;
             }
@@ -573,7 +573,7 @@ int Document_Viewer::setFileNum()
         }
         else if(gra=="مرحلة الابتدائي")
         {
-            if(opt=="الخطة والتسجيل")
+            if(opt=="اضافي")
             {
                 return 24;
             }
@@ -581,7 +581,7 @@ int Document_Viewer::setFileNum()
             {
                 return 25;
             }
-            else if(opt=="الشواهد والتقارير")
+            else if(opt=="الخطة والتسجيل")
             {
                 return 26;
             }
@@ -646,9 +646,15 @@ void Document_Viewer::fileNames()
 
         reverse(name.begin(),name.end());
 
-        names[setFileNum()][tempPlace].first=path;
-        names[setFileNum()][tempPlace].second.first=name;
-        names[setFileNum()][tempPlace].second.second=exten;
+        map < int , pair < string , pair < string , string > > > temp;
+        temp[tempPlace].first=path;
+        temp[tempPlace].second.first=name;
+        temp[tempPlace].second.second=exten;
+
+//        names[setFileNum()][tempPlace].first=path;
+//        names[setFileNum()][tempPlace].second.first=name;
+//        names[setFileNum()][tempPlace].second.second=exten;
+        names.push_back(temp);
         tempPlace++;
     }
     fileCloser();
