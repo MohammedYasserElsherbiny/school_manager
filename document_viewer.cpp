@@ -31,7 +31,7 @@ Document_Viewer::Document_Viewer()
 
     previous_document_btn = new QPushButton("<");
     next_document_btn = new QPushButton(">");
-    document_preview_btn = new QPushButton();
+    mainWindow->document_preview_btn = new QPushButton();
     //mainWindow->setMainItem();
 
     load_file = new QPushButton("اضافة");
@@ -43,7 +43,7 @@ Document_Viewer::Document_Viewer()
     QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
     QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
     QObject::connect(remove_file, &QPushButton::clicked, this, & Document_Viewer::removeFromFile);
-    QObject::connect(document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::itemOpener);
+    QObject::connect(mainWindow->document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::itemOpener);
 
 
 }
@@ -73,14 +73,14 @@ void Document_Viewer::show_window()
         mainWindow->height * 65 / 100 - next_document_proxy->boundingRect().height()/2
     );
 
-    document_preview_proxy = mainWindow->scene->addWidget(document_preview_btn);
-    document_preview_proxy->resize(
+    mainWindow->document_preview_proxy = mainWindow->scene->addWidget(mainWindow->document_preview_btn);
+    mainWindow->document_preview_proxy->resize(
         mainWindow->width * 45 / 100,
         150
     );
-    document_preview_proxy->setPos(
-        mainWindow->width/2 - document_preview_proxy->boundingRect().width()/2,
-        mainWindow->height * 65 / 100 - document_preview_proxy->boundingRect().height()/2
+    mainWindow->document_preview_proxy->setPos(
+        mainWindow->width/2 - mainWindow->document_preview_proxy->boundingRect().width()/2,
+        mainWindow->height * 65 / 100 - mainWindow->document_preview_proxy->boundingRect().height()/2
     );
 
     load_file_proxy = mainWindow->scene->addWidget(load_file);
@@ -130,7 +130,7 @@ void Document_Viewer::loadFile()
     mainWindow->storge_files[mainWindow->storge_file_names[mainWindow->setFileNum()]] << mainWindow->file_name.toStdString()<<endl ;
 
     mainWindow->fileNames();
-    mainWindow->setMainItem();
+    documentViewerIconAndName();
 
 }
 
@@ -139,23 +139,18 @@ string Document_Viewer::currentItem()
     return mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first;
 }
 
-string Document_Viewer::currentName()
-{
-    map < int , pair < string , pair < string , string > > > temp;
-    temp=mainWindow->names[mainWindow->place%(mainWindow->names.size())];
-    return temp[mainWindow->place%(mainWindow->names.size())].second.first;
-}
+
 
 void Document_Viewer::previousItem()
 {
     mainWindow->place--;
-    mainWindow->setMainItem();
+    documentViewerIconAndName();
 }
 
 void Document_Viewer::nextItem()
 {
     mainWindow->place++;
-    mainWindow->setMainItem();
+    documentViewerIconAndName();
 }
 
 
@@ -193,7 +188,7 @@ void Document_Viewer::removeFromFile()
 
     mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
 
-    mainWindow->setMainItem();
+    documentViewerIconAndName();
 }
 
 void Document_Viewer::itemOpener()
@@ -211,47 +206,97 @@ void Document_Viewer::itemOpener()
 
 void Document_Viewer::documentViewerIconAndName()
 {
-    string extention= mainWindow->setMainItem();
-    if(extention=="")
+//    string extention;//= mainWindow->setMainItem();
+//    if(extention=="")
+//    {
+//        mainWindow->document_preview_btn->setText("لا يوجد ملفات");
+//        mainWindow->document_preview_btn->setIcon(QIcon());
+//    }
+//    else
+//    {
+//        mainWindow->document_preview_btn->setText(QString::fromStdString(currentName()));
+
+//        if(extention=="txt")
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
+//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
+//        }
+//        else if(extention=="jpg")
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
+//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
+//        }
+//        else if(extention=="xls")
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
+//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
+//        }
+//        else if(extention=="ppt")
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
+//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
+//        }
+//        else if(extention=="doc")
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
+//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
+//        }
+//        else
+//        {
+//            mainWindow->document_preview_btn->setIcon(QIcon());
+//        }
+
+//    }
+
+    /*void Document_Viewer::setMainItem()
+{
+    if(filesystem::is_empty("storge.txt"))
+    if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
         document_preview_btn->setText("لا يوجد ملفات");
         document_preview_btn->setIcon(QIcon());
+        return ;
     }
     else
     {
         document_preview_btn->setText(QString::fromStdString(currentName()));
-
-        if(extention=="txt")
-        {
-            document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
-            document_preview_btn->setIconSize(QSize(65, 65));
-        }
-        else if(extention=="jpg")
-        {
-            document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
-            document_preview_btn->setIconSize(QSize(65, 65));
-        }
-        else if(extention=="xls")
-        {
-            document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
-            document_preview_btn->setIconSize(QSize(65, 65));
-        }
-        else if(extention=="ppt")
-        {
-            document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
-            document_preview_btn->setIconSize(QSize(65, 65));
-        }
-        else if(extention=="doc")
-        {
-            document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
-            document_preview_btn->setIconSize(QSize(65, 65));
-        }
-        else
-        {
-            document_preview_btn->setIcon(QIcon());
-        }
-
     }
+
+    if(names[place%names.size()].second.second=="txt")
+    if(names[setFileNum()][place%names.size()].second.second=="txt")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if((names[place%names.size()].second.second=="bmp")||(names[place%names.size()].second.second=="jpg")||(names[place%names.size()].second.second=="png"))
+    else if((names[setFileNum()][place%names.size()].second.second=="bmp")||(names[setFileNum()][place%names.size()].second.second=="jpg")||(names[setFileNum()][place%names.size()].second.second=="png"))
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="xlsx")
+    else if(names[setFileNum()][place%names.size()].second.second=="xlsx"||names[setFileNum()][place%names.size()].second.second=="csv"||names[setFileNum()][place%names.size()].second.second=="xls")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="pptx")
+    else if(names[setFileNum()][place%names.size()].second.second=="pptx"||names[setFileNum()][place%names.size()].second.second=="ppt"||names[setFileNum()][place%names.size()].second.second=="pot")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(names[place%names.size()].second.second=="docx")
+    else if(names[setFileNum()][place%names.size()].second.second=="docx"||names[setFileNum()][place%names.size()].second.second=="doc")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else
+    {
+        document_preview_btn->setIcon(QIcon());
+    }
+}*/
 }
 
 

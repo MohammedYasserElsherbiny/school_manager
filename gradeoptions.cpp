@@ -96,6 +96,7 @@ void GradeOptions::showDocumentViewer()
     mainWindow->fileOpener();
     if(!filesystem::is_empty((mainWindow->storge_file_names[mainWindow->setFileNum()]).c_str()))
         mainWindow->fileNames();
+    mainWindow->setMainItem();
     mainWindow->document_viewer->show_window();
 }
 

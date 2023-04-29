@@ -49,6 +49,9 @@ public:
 
     int place;
 
+    QPushButton *document_preview_btn;
+    QGraphicsProxyWidget *document_preview_proxy;
+
 
     // Window functions
     void clearScene();
@@ -61,7 +64,9 @@ public:
     int setFileNum ();
     void fileNames ();
     void fileCloser ();
-    string setMainItem ();
+    void setMainItem ();
+    string currentName ();
+
 
 
 

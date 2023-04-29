@@ -495,51 +495,62 @@ void MainWindow::generateFolders()
 
 }
 
-string MainWindow::setMainItem()
+void MainWindow::setMainItem()
 {
-    string TempStr="";
-    //fileOpener();
-    map < int , pair < string , pair < string , string > > > temp;
+    map < int , pair < string , pair < string , string > > >  temp;
+    temp=names[place];
+
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
-
-        return TempStr ;
+        document_preview_btn->setText("لا يوجد ملفات");
+        document_preview_btn->setIcon(QIcon());
+        return ;
     }
     else
     {
-
-        temp=names[place%(names.size())];
-        if(temp[place%(names.size())].second.second=="txt")
-        {
-            TempStr="txt";
-
-        }
-        else if((temp[place%(names.size())].second.second=="bmp")||(temp[place%(names.size())].second.second=="jpg")||(temp[place%(names.size())].second.second=="png"))
-        {
-            TempStr="jpg";
-        }
-        else if(temp[place%(names.size())].second.second=="xlsx"||temp[place%(names.size())].second.second=="csv"||temp[place%(names.size())].second.second=="xls")
-        {
-            TempStr="xls";
-        }
-        else if(temp[place%(names.size())].second.second=="pptx"||temp[place%(names.size())].second.second=="ppt"||temp[place%(names.size())].second.second=="pot")
-        {
-            TempStr="ppt";
-        }
-        else if(temp[place%(names.size())].second.second=="docx"||temp[place%(names.size())].second.second=="doc")
-        {
-            TempStr="doc";
-        }
-        else
-        {
-            TempStr="no";
-        }
-
-        return TempStr;
+        document_preview_btn->setText(QString::fromStdString(currentName()));
     }
 
+    if(temp[place%names.size()].second.second=="txt")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
 
-    //fileCloser();
+    else if((temp[place%names.size()].second.second=="bmp")||(temp[place%names.size()].second.second=="jpg")||(temp[place%names.size()].second.second=="png"))
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+
+    else if(temp[place%names.size()].second.second=="xlsx"||temp[place%names.size()].second.second=="csv"||temp[place%names.size()].second.second=="xls")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+
+    else if(temp[place%names.size()].second.second=="pptx"||temp[place%names.size()].second.second=="ppt"||temp[place%names.size()].second.second=="pot")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+
+    else if(temp[place%names.size()].second.second=="docx"||temp[place%names.size()].second.second=="doc")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else
+    {
+        document_preview_btn->setIcon(QIcon());
+    }
+}
+
+string MainWindow::currentName()
+{
+    map < int , pair < string , pair < string , string > > > temp;
+    temp=names[place%(names.size())];
+    return temp[place%(names.size())].second.first;
 }
 
 
