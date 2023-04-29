@@ -497,9 +497,9 @@ void MainWindow::generateFolders()
 
 void MainWindow::setMainItem()
 {
-    map < int , pair < string , pair < string , string > > >  temp;
-    temp=names[place%(names.size())];
-
+    map < int , pair < string , pair < string , string > > >  temp12;
+    temp12=names[place%(names.size())];
+    string plzWorkStr=temp12[0].second.second;
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
         document_preview_btn->setText("لا يوجد ملفات");
@@ -511,31 +511,31 @@ void MainWindow::setMainItem()
         document_preview_btn->setText(QString::fromStdString(currentName()));
     }
 
-    if(temp[place%names.size()].second.second=="txt")
+    if(plzWorkStr=="txt")
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
 
-    else if((temp[place%names.size()].second.second=="bmp")||(temp[place%names.size()].second.second=="jpg")||(temp[place%names.size()].second.second=="png"))
+    else if((plzWorkStr=="bmp")||(plzWorkStr=="jpg")||(plzWorkStr=="png"))
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
 
-    else if(temp[place%names.size()].second.second=="xlsx"||temp[place%names.size()].second.second=="csv"||temp[place%names.size()].second.second=="xls")
+    else if(plzWorkStr=="xlsx"||plzWorkStr=="csv"||plzWorkStr=="xls")
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
 
-    else if(temp[place%names.size()].second.second=="pptx"||temp[place%names.size()].second.second=="ppt"||temp[place%names.size()].second.second=="pot")
+    else if(plzWorkStr=="pptx"||plzWorkStr=="ppt"||plzWorkStr=="pot")
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
 
-    else if(temp[place%names.size()].second.second=="docx"||temp[place%names.size()].second.second=="doc")
+    else if(plzWorkStr=="docx"||plzWorkStr=="doc")
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
         document_preview_btn->setIconSize(QSize(65, 65));

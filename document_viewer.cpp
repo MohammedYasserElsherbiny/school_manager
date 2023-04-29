@@ -131,12 +131,15 @@ void Document_Viewer::loadFile()
 
     mainWindow->fileNames();
     mainWindow->setMainItem();
+    mainWindow->fileCloser();
 
 }
 
 string Document_Viewer::currentItem()
 {
-    return mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first;
+    map < int , pair < string , pair < string , string > > > temp;
+    temp=mainWindow->names[mainWindow->place%(mainWindow->names.size())];
+    return temp[mainWindow->place%(mainWindow->names.size())].first;
 }
 
 
@@ -183,7 +186,7 @@ void Document_Viewer::removeFromFile()
     remove(path.c_str());
     rename(tempPath.c_str(), path.c_str());
 
-    const char *ttemp=(mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first).c_str();
+    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
     int s=remove(ttemp);
 
     mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
