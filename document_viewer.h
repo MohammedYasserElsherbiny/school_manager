@@ -28,18 +28,10 @@ private:
     QGraphicsProxyWidget *document_preview_proxy;
     QGraphicsProxyWidget *load_file_proxy, *remove_file_proxy, *print_file_proxy;
 
-    QString file_name ;
 
-    map<string,fstream> storge_files;
-                //number of the line ,  path , name of the file , extention of the file
-    vector< map < int , pair < string , pair < string , string > > > > names;
-
-    set <string> temp_storge_file_names;
-    vector<string>storge_file_names;
 
     fstream file;
 
-    int place;
 
     QProcess process;
 
@@ -52,15 +44,11 @@ private:
     void previousItem ();
     string currentName ();
     void nextItem ();
-    void fileNames ();
-    void setMainItem ();
+
     void removeFromFile ();
     void itemOpener ();
-    void generateFolders ();
-    void generateFiles ();
-    int setFileNum ();
-    void fileOpener ();
-    void fileCloser ();
+    void documentViewerIconAndName ();
+
 
 };
 

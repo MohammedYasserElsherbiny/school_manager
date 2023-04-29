@@ -87,4 +87,459 @@ void MainWindow::showGenderSelectionWindow()
 
 }
 
+//for document viwer
+
+void MainWindow::fileNames()
+{
+    fileOpener();
+    string path;
+    int tempPlace=0;
+    ifstream ifile(storge_file_names[setFileNum()]);
+    while(getline(ifile, path))
+    {
+
+        string name;
+        string exten;
+        bool dotFlag= false;
+        int path_size=path.size();
+        for(int i=path_size-1;i>=0;i--)
+        {
+            if(path[i]=='.')
+            {
+                dotFlag= true;
+                reverse(exten.begin(),exten.end());
+                continue;
+            }
+
+            if(!dotFlag)
+            {
+                exten.push_back(path[i]);
+                continue;
+            }
+
+            if(path[i]=='/')
+            {
+                break;
+            }
+
+            name.push_back(path[i]);
+        }
+
+        reverse(name.begin(),name.end());
+
+        map < int , pair < string , pair < string , string > > > temp;
+        temp[tempPlace].first=path;
+        temp[tempPlace].second.first=name;
+        temp[tempPlace].second.second=exten;
+
+//        names[setFileNum()][tempPlace].first=path;
+//        names[setFileNum()][tempPlace].second.first=name;
+//        names[setFileNum()][tempPlace].second.second=exten;
+        names.push_back(temp);
+        tempPlace++;
+    }
+    fileCloser();
+}
+
+
+void MainWindow::fileOpener()
+{
+    storge_files[storge_file_names[setFileNum()]].open(storge_file_names[setFileNum()],ios::app);
+}
+
+void MainWindow::fileCloser()
+{
+    storge_files[storge_file_names[setFileNum()]].close();
+}
+
+int MainWindow::setFileNum()
+{
+    string gen=gender,gra=grade,opt=option;
+
+
+    if(gen=="بنات")
+    {
+        if(gra=="مرحلة الثانوي")
+        {
+            if(opt=="اضافي")
+            {
+                return 0;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 1;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+        else if(gra=="مرحلة المتوسط")
+        {
+            if(opt=="اضافي")
+            {
+                return 4;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 5;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 6;
+            }
+            else
+            {
+                return 7;
+            }
+        }
+        else if(gra=="مرحلة الروضة")
+        {
+            if(opt=="اضافي")
+            {
+                return 8;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 9;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 10;
+            }
+            else
+            {
+                return 11;
+            }
+        }
+        else
+        {
+            if(opt=="اضافي")
+            {
+                return 12;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 13;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 14;
+            }
+            else
+            {
+                return 15;
+            }
+        }
+    }
+    else if(gen=="بنين")
+    {
+        if(gra=="مرحلة الثانوي")
+        {
+            if(opt=="اضافي")
+            {
+                return 16;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 17;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 18;
+            }
+            else
+            {
+                return 19;
+            }
+        }
+        else if(gra=="مرحلة المتوسط")
+        {
+            if(opt=="اضافي")
+            {
+                return 20;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 21;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 22;
+            }
+            else
+            {
+                return 23;
+            }
+        }
+        else if(gra=="مرحلة الابتدائي")
+        {
+            if(opt=="اضافي")
+            {
+                return 24;
+            }
+            else if(opt=="التعاميم")
+            {
+                return 25;
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return 26;
+            }
+            else
+            {
+                return 27;
+            }
+        }
+
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void MainWindow::generateFiles()
+{
+    string male="Male",female="Female",add="Additional",cir="Circular",pla="Plan",repor="Report",kin="Kinder",inter="Intermediate",high="High school",pri="Primary";
+
+    for(int i=0;i<2;i++)
+    {
+        string temp="Storge";
+
+        if(i==1)
+        {
+            temp+=male;
+        }
+        else
+        {
+            temp+=female;
+        }
+
+        vector <string> fourTemp;
+        for(int j=0;j<4;j++)
+        {
+            fourTemp.push_back(temp+pri);
+            //break;
+
+
+            fourTemp.push_back(temp+inter);
+            //break;
+
+
+            fourTemp.push_back(temp+high);
+            //break;
+
+            if(i!=1)
+                fourTemp.push_back(temp+kin);
+            //break;
+
+
+            vector <string> lastTemp;
+            for(int l=0;l<fourTemp.size()*4;l++)
+            {
+                if(l<4)
+                {
+                    lastTemp.push_back(fourTemp[0]);
+                }
+                else if(l<8)
+                {
+                    lastTemp.push_back(fourTemp[1]);
+                }
+                else if(l<12)
+                {
+                    lastTemp.push_back(fourTemp[2]);
+                }
+                else
+                {
+                    lastTemp.push_back(fourTemp[3]);
+                }
+            }
+
+            for(int k=0;k<(fourTemp.size()*4);k++)
+            {
+                string temp1,temp2,temp3,temp4;
+                if(k<4)
+                {
+                    temp1=lastTemp[k]+add;
+                    temp1+=".txt";
+                    temp_storge_file_names.insert(temp1);
+                    storge_files[temp1].open(temp1,ios::app);
+                    temp2=lastTemp[k]+cir;
+                    temp2+=".txt";
+                    temp_storge_file_names.insert(temp2);
+                    storge_files[temp2].open(temp2,ios::app);
+                    temp3=lastTemp[k]+pla;
+                    temp3+=".txt";
+                    temp_storge_file_names.insert(temp3);
+                    storge_files[temp3].open(temp3,ios::app);
+                    temp4=lastTemp[k]+repor;
+                    temp4+=".txt";
+                    temp_storge_file_names.insert(temp4);
+                    storge_files[temp4].open(temp4,ios::app);
+                    //break;
+                }
+                else if (k<8)
+                {
+                    temp1=lastTemp[k]+add;
+                    temp1+=".txt";
+                    temp_storge_file_names.insert(temp1);
+                    storge_files[temp1].open(temp1,ios::app);
+                    temp2=lastTemp[k]+cir;
+                    temp2+=".txt";
+                    temp_storge_file_names.insert(temp2);
+                    storge_files[temp2].open(temp2,ios::app);
+                    temp3=lastTemp[k]+pla;
+                    temp3+=".txt";
+                    temp_storge_file_names.insert(temp3);
+                    storge_files[temp3].open(temp3,ios::app);
+                    temp4=lastTemp[k]+repor;
+                    temp4+=".txt";
+                    temp_storge_file_names.insert(temp4);
+                    storge_files[temp4].open(temp4,ios::app);
+                    //break;
+                }
+                else if(k<12)
+                {
+                    temp1=lastTemp[k]+add;
+                    temp1+=".txt";
+                    temp_storge_file_names.insert(temp1);
+                    storge_files[temp1].open(temp1,ios::app);
+                    temp2=lastTemp[k]+cir;
+                    temp2+=".txt";
+                    temp_storge_file_names.insert(temp2);
+                    storge_files[temp2].open(temp2,ios::app);
+                    temp3=lastTemp[k]+pla;
+                    temp3+=".txt";
+                    temp_storge_file_names.insert(temp3);
+                    storge_files[temp3].open(temp3,ios::app);
+                    temp4=lastTemp[k]+repor;
+                    temp4+=".txt";
+                    temp_storge_file_names.insert(temp4);
+                    storge_files[temp4].open(temp4,ios::app);
+
+                    //break;
+                }
+                else
+                {
+                    temp1=lastTemp[k]+add;
+                    temp1+=".txt";
+                    temp_storge_file_names.insert(temp1);
+                    storge_files[temp1].open(temp1,ios::app);
+                    temp2=lastTemp[k]+cir;
+                    temp2+=".txt";
+                    temp_storge_file_names.insert(temp2);
+                    storge_files[temp2].open(temp2,ios::app);
+                    temp3=lastTemp[k]+pla;
+                    temp3+=".txt";
+                    temp_storge_file_names.insert(temp3);
+                    storge_files[temp3].open(temp3,ios::app);
+                    temp4=lastTemp[k]+repor;
+                    temp4+=".txt";
+                    temp_storge_file_names.insert(temp4);
+                    storge_files[temp4].open(temp4,ios::app);
+                    //break;
+
+                }
+            }
+        }
+
+    }
+
+    //coping set to the vector
+
+    for(string str : temp_storge_file_names)
+    {
+        storge_file_names.push_back(str);
+    }
+}
+
+void MainWindow::generateFolders()
+{
+
+    //male
+    filesystem::create_directories("C:/school_manager/male/Primary/additional");
+    filesystem::create_directories("C:/school_manager/male/Primary/Circular");
+    filesystem::create_directories("C:/school_manager/male/Primary/Plan");
+    filesystem::create_directories("C:/school_manager/male/Primary/Reports");
+    filesystem::create_directories("C:/school_manager/male/Intermediate/additional");
+    filesystem::create_directories("C:/school_manager/male/Intermediate/Circular");
+    filesystem::create_directories("C:/school_manager/male/Intermediate/Plan");
+    filesystem::create_directories("C:/school_manager/male/Intermediate/Reports");
+    filesystem::create_directories("C:/school_manager/male/High school/additional");
+    filesystem::create_directories("C:/school_manager/male/High school/Circular");
+    filesystem::create_directories("C:/school_manager/male/High school/Plan");
+
+    //female
+    filesystem::create_directories("C:/school_manager/female/Primary/additional");
+    filesystem::create_directories("C:/school_manager/female/Primary/Circular");
+    filesystem::create_directories("C:/school_manager/female/Primary/Plan");
+    filesystem::create_directories("C:/school_manager/female/Primary/Reports");
+    filesystem::create_directories("C:/school_manager/female/Intermediate/additional");
+    filesystem::create_directories("C:/school_manager/female/Intermediate/Circular");
+    filesystem::create_directories("C:/school_manager/female/Intermediate/Plan");
+    filesystem::create_directories("C:/school_manager/female/Intermediate/Reports");
+    filesystem::create_directories("C:/school_manager/female/High school/additional");
+    filesystem::create_directories("C:/school_manager/female/High school/Circular");
+    filesystem::create_directories("C:/school_manager/female/High school/Plan");
+    filesystem::create_directories("C:/school_manager/female/High school/Reports");
+    filesystem::create_directories("C:/school_manager/female/Kindergarten/additional");
+    filesystem::create_directories("C:/school_manager/female/Kindergarten/Circular");
+    filesystem::create_directories("C:/school_manager/female/Kindergarten/Plan");
+    filesystem::create_directories("C:/school_manager/female/Kindergarten/Reports");
+
+
+}
+
+string MainWindow::setMainItem()
+{
+    string TempStr="";
+    //fileOpener();
+    map < int , pair < string , pair < string , string > > > temp;
+    if(filesystem::is_empty(storge_file_names[setFileNum()]))
+    {
+
+        return TempStr ;
+    }
+    else
+    {
+
+        temp=names[place%(names.size())];
+        if(temp[place%(names.size())].second.second=="txt")
+        {
+            TempStr="txt";
+
+        }
+        else if((temp[place%(names.size())].second.second=="bmp")||(temp[place%(names.size())].second.second=="jpg")||(temp[place%(names.size())].second.second=="png"))
+        {
+            TempStr="jpg";
+        }
+        else if(temp[place%(names.size())].second.second=="xlsx"||temp[place%(names.size())].second.second=="csv"||temp[place%(names.size())].second.second=="xls")
+        {
+            TempStr="xls";
+        }
+        else if(temp[place%(names.size())].second.second=="pptx"||temp[place%(names.size())].second.second=="ppt"||temp[place%(names.size())].second.second=="pot")
+        {
+            TempStr="ppt";
+        }
+        else if(temp[place%(names.size())].second.second=="docx"||temp[place%(names.size())].second.second=="doc")
+        {
+            TempStr="doc";
+        }
+        else
+        {
+            TempStr="no";
+        }
+
+        return TempStr;
+    }
+
+
+    //fileCloser();
+}
+
 

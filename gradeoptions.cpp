@@ -91,6 +91,11 @@ void GradeOptions::showGradeSelection()
 void GradeOptions::showDocumentViewer()
 {
     mainWindow->clearScene();
+    mainWindow->generateFolders();
+    mainWindow->generateFiles();
+    mainWindow->fileOpener();
+    if(!filesystem::is_empty((mainWindow->storge_file_names[mainWindow->setFileNum()]).c_str()))
+        mainWindow->fileNames();
     mainWindow->document_viewer->show_window();
 }
 

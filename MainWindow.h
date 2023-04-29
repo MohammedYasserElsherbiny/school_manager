@@ -37,9 +37,34 @@ public:
 
     string gender,grade,option;
 
+    //for document viwer
+    QString file_name ;
+
+    map<string,fstream> storge_files;
+                //number of the line ,  path , name of the file , extention of the file
+    vector< map < int , pair < string , pair < string , string > > > > names;
+
+    set <string> temp_storge_file_names;
+    vector<string>storge_file_names;
+
+    int place;
+
+
     // Window functions
     void clearScene();
     void show_window();
+
+    //for document viwer
+    void generateFolders ();
+    void generateFiles ();
+    void fileOpener ();
+    int setFileNum ();
+    void fileNames ();
+    void fileCloser ();
+    string setMainItem ();
+
+
+
 
 private:
     void showGenderSelectionWindow();
