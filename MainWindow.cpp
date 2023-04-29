@@ -498,7 +498,7 @@ void MainWindow::generateFolders()
 void MainWindow::setMainItem()
 {
     map < int , pair < string , pair < string , string > > >  temp;
-    temp=names[place];
+    temp=names[place%(names.size())];
 
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {

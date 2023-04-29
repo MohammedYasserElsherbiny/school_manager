@@ -130,7 +130,7 @@ void Document_Viewer::loadFile()
     mainWindow->storge_files[mainWindow->storge_file_names[mainWindow->setFileNum()]] << mainWindow->file_name.toStdString()<<endl ;
 
     mainWindow->fileNames();
-    documentViewerIconAndName();
+    mainWindow->setMainItem();
 
 }
 
@@ -144,13 +144,13 @@ string Document_Viewer::currentItem()
 void Document_Viewer::previousItem()
 {
     mainWindow->place--;
-    documentViewerIconAndName();
+    mainWindow->setMainItem();
 }
 
 void Document_Viewer::nextItem()
 {
     mainWindow->place++;
-    documentViewerIconAndName();
+    mainWindow->setMainItem();
 }
 
 
@@ -188,7 +188,7 @@ void Document_Viewer::removeFromFile()
 
     mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
 
-    documentViewerIconAndName();
+    mainWindow->currentName();
 }
 
 void Document_Viewer::itemOpener()
@@ -203,109 +203,3 @@ void Document_Viewer::itemOpener()
     //WinExec(c,SW_HIDE );
     //SW_HIDE
 }
-
-void Document_Viewer::documentViewerIconAndName()
-{
-//    string extention;//= mainWindow->setMainItem();
-//    if(extention=="")
-//    {
-//        mainWindow->document_preview_btn->setText("لا يوجد ملفات");
-//        mainWindow->document_preview_btn->setIcon(QIcon());
-//    }
-//    else
-//    {
-//        mainWindow->document_preview_btn->setText(QString::fromStdString(currentName()));
-
-//        if(extention=="txt")
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
-//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
-//        }
-//        else if(extention=="jpg")
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
-//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
-//        }
-//        else if(extention=="xls")
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
-//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
-//        }
-//        else if(extention=="ppt")
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
-//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
-//        }
-//        else if(extention=="doc")
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
-//            mainWindow->document_preview_btn->setIconSize(QSize(65, 65));
-//        }
-//        else
-//        {
-//            mainWindow->document_preview_btn->setIcon(QIcon());
-//        }
-
-//    }
-
-    /*void Document_Viewer::setMainItem()
-{
-    if(filesystem::is_empty("storge.txt"))
-    if(filesystem::is_empty(storge_file_names[setFileNum()]))
-    {
-        document_preview_btn->setText("لا يوجد ملفات");
-        document_preview_btn->setIcon(QIcon());
-        return ;
-    }
-    else
-    {
-        document_preview_btn->setText(QString::fromStdString(currentName()));
-    }
-
-    if(names[place%names.size()].second.second=="txt")
-    if(names[setFileNum()][place%names.size()].second.second=="txt")
-    {
-        document_preview_btn->setIcon(QIcon(":/Assets/Images/images.png"));
-        document_preview_btn->setIconSize(QSize(65, 65));
-    }
-    else if((names[place%names.size()].second.second=="bmp")||(names[place%names.size()].second.second=="jpg")||(names[place%names.size()].second.second=="png"))
-    else if((names[setFileNum()][place%names.size()].second.second=="bmp")||(names[setFileNum()][place%names.size()].second.second=="jpg")||(names[setFileNum()][place%names.size()].second.second=="png"))
-    {
-        document_preview_btn->setIcon(QIcon(":/Assets/Images/Photos-new-icon.png"));
-        document_preview_btn->setIconSize(QSize(65, 65));
-    }
-    else if(names[place%names.size()].second.second=="xlsx")
-    else if(names[setFileNum()][place%names.size()].second.second=="xlsx"||names[setFileNum()][place%names.size()].second.second=="csv"||names[setFileNum()][place%names.size()].second.second=="xls")
-    {
-        document_preview_btn->setIcon(QIcon(":/Assets/Images/Microsoft Excel Vector PNG Images, Microsoft Excel Icon, Excel Icons, Microsoft Icons, Microsoft PNG Image For Free Download.jpg"));
-        document_preview_btn->setIconSize(QSize(65, 65));
-    }
-    else if(names[place%names.size()].second.second=="pptx")
-    else if(names[setFileNum()][place%names.size()].second.second=="pptx"||names[setFileNum()][place%names.size()].second.second=="ppt"||names[setFileNum()][place%names.size()].second.second=="pot")
-    {
-        document_preview_btn->setIcon(QIcon(":/Assets/Images/Powerpoints Clipart Vector, Powerpoint Icon, Powerpoint Icons, Microsoft, Azure PNG Image For Free Download.jpg"));
-        document_preview_btn->setIconSize(QSize(65, 65));
-    }
-    else if(names[place%names.size()].second.second=="docx")
-    else if(names[setFileNum()][place%names.size()].second.second=="docx"||names[setFileNum()][place%names.size()].second.second=="doc")
-    {
-        document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
-        document_preview_btn->setIconSize(QSize(65, 65));
-    }
-    else
-    {
-        document_preview_btn->setIcon(QIcon());
-    }
-}*/
-}
-
-
-
-
-
-
-
-
-
-
-

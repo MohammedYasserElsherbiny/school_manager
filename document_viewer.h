@@ -46,7 +46,7 @@ private:
 
     void removeFromFile ();
     void itemOpener ();
-    void documentViewerIconAndName ();
+
 
 
 };
