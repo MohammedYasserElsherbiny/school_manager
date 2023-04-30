@@ -1,6 +1,7 @@
 #include "gradeoptions.h"
 #include <MainWindow.h>
 #include <gradeselection.h>
+#include <filesystem>
 
 extern MainWindow * mainWindow;
 
@@ -59,7 +60,6 @@ void GradeOptions::show_window()
 {
     if(mainWindow->gender=="بنين")
     {
-        mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
                         QBrush(QImage(":/Assets/Images/male_options.jpg").scaledToWidth(mainWindow->width))
                     );
@@ -67,7 +67,6 @@ void GradeOptions::show_window()
     }
     else if(mainWindow->gender=="بنات")
     {
-        mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
                         QBrush(QImage(":/Assets/Images/female_options.jpg").scaledToWidth(mainWindow->width))
         );
@@ -85,6 +84,7 @@ void GradeOptions::show_window()
 void GradeOptions::showGradeSelection()
 {
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &GradeOptions::showGradeSelection);
     mainWindow->grade_selection_window->show_window();
 }
 
@@ -98,6 +98,7 @@ void GradeOptions::showDocumentViewer()
         mainWindow->fileNames();
     mainWindow->setMainItem();
     mainWindow->fileCloser();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &GradeOptions::showGradeSelection);
     mainWindow->document_viewer->show_window();
 }
 

@@ -124,13 +124,12 @@ void Document_Viewer::show_window()
 
 
     QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &Document_Viewer::showGradeOptions);
-
-
 }
 
 void Document_Viewer::showGradeOptions()
 {
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &Document_Viewer::showGradeOptions);
     mainWindow->grade_options_window->show_window();
 }
 

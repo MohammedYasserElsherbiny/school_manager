@@ -1,5 +1,8 @@
 #include "MainWindow.h"
 #include <cmath>
+#include <filesystem>
+#include <iostream>
+
 MainWindow::MainWindow()
 {
     // Setup global Scene
@@ -19,10 +22,6 @@ MainWindow::MainWindow()
     setScene(scene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-
-
-
 
     // Btn Demo
     startBtn = new QPushButton();
@@ -63,29 +62,21 @@ void MainWindow::clearScene()
 {
     foreach (QGraphicsItem *item, scene->items()) {
         if(item != backBtnProxy)
-        item->hide();
-            //scene->removeItem(item);
+            item->hide();
     }
 }
 
 void MainWindow::show_window()
 {
-
-
     scene->setBackgroundBrush(QBrush(QImage(":/Assets/Images/start.jpg").scaledToWidth(width)));
-
     startBtn->show();
-
     backBtn->hide();
-
 }
 
 void MainWindow::showGenderSelectionWindow()
 {
     clearScene();
-
     gender_selection_window->show_window();
-
 }
 
 //for document viwer

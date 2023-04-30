@@ -14,6 +14,7 @@
 #include <gradeselection.h>
 #include <gradeoptions.h>
 #include <string>
+#include <QString>
 
 class MainWindow : public QGraphicsView
 {
@@ -60,9 +61,9 @@ public:
     void show_window();
 
     //for document viwer
-    void generateFolders ();
-    void generateFiles ();
-    void fileOpener ();
+    void generateFolders();
+    void generateFiles();
+    void fileOpener();
     int setFileNum ();
     void fileNames ();
     void fileCloser ();

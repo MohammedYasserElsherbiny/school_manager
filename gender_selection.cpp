@@ -4,15 +4,11 @@ extern MainWindow * mainWindow;
 
 Gender_Selection::Gender_Selection()
 {
-
-
     maleBtn = new QPushButton("");
     maleBtn->setText("بنين");
 
     femaleBtn = new QPushButton("");
     femaleBtn->setText("بنات");
-
-
 
     maleBtnProxy = mainWindow->scene->addWidget(maleBtn);
     maleBtnProxy->setPos(mainWindow->width/2 + 30,
@@ -22,11 +18,8 @@ Gender_Selection::Gender_Selection()
     femaleBtnProxy->setPos(mainWindow->width/2 - femaleBtnProxy->boundingRect().width() - 20,
                            mainWindow->height/2 - femaleBtnProxy->boundingRect().height()/2+30);
 
-
     femaleBtn->hide();
     maleBtn->hide();
-
-
 
     QObject::connect(maleBtn, &QPushButton::clicked, this, &Gender_Selection::showMaleGradeWindow);
     QObject::connect(femaleBtn, &QPushButton::clicked, this, &Gender_Selection::showFemaleGradeWindow);
@@ -50,6 +43,7 @@ void Gender_Selection::showMaleGradeWindow()
 {
     mainWindow->gender="بنين";
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &Gender_Selection::showMainWindow);
     mainWindow->grade_selection_window->show_window();
 }
 
@@ -58,12 +52,13 @@ void Gender_Selection::showFemaleGradeWindow()
 
     mainWindow->gender="بنات";
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &Gender_Selection::showMainWindow);
     mainWindow->grade_selection_window->show_window();
 }
 
 void Gender_Selection::showMainWindow()
 {
-
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, &Gender_Selection::showMainWindow);
     mainWindow->clearScene();
     mainWindow->show_window();
 }

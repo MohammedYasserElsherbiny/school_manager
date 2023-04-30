@@ -51,7 +51,6 @@ void GradeSelection::show_window()
 {
     if(mainWindow->gender=="بنين")
     {
-        mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
                         QBrush(QImage(":/Assets/Images/male_grade.jpg").scaledToWidth(mainWindow->width))
         );
@@ -59,7 +58,6 @@ void GradeSelection::show_window()
     }
     else if(mainWindow->gender=="بنات")
     {
-        mainWindow->clearScene();
         mainWindow->scene->setBackgroundBrush(
             QBrush(QImage(":/Assets/Images/female_grade.jpg").scaledToWidth(mainWindow->width))
         );
@@ -78,12 +76,14 @@ void GradeSelection::show_window()
 void GradeSelection::showGenderSelectionWindow()
 {
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, & GradeSelection::showGenderSelectionWindow);
     mainWindow->gender_selection_window->show_window();
 }
 
 void GradeSelection::showGradeOptions()
 {
     mainWindow->clearScene();
+    QObject::disconnect(mainWindow->backBtn, &QPushButton::clicked, this, & GradeSelection::showGenderSelectionWindow);
     mainWindow->grade_options_window->show_window();
 }
 
