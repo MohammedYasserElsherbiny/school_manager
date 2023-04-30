@@ -508,11 +508,11 @@ void MainWindow::generateFolders()
 
 void MainWindow::setMainItem()
 {
-    //place=abs(place);
+    //place=abs(pla  ce);
 
     map < int , pair < string , pair < string , string > > >  temp12;
     int tempIdx;
-    if(abs(place)==(int)(names.size()-1))
+    if(abs(place)==(int)(names.size()-1)&&(place<0))
     {
         place=0;
     }
@@ -586,7 +586,7 @@ string MainWindow::currentName()
 {
     map < int , pair < string , pair < string , string > > > temp;
     int tempIdx;
-    if(abs(place)==(int)(names.size()-1))
+    if(abs(place)==(int)(names.size()-1)&&(place<0))
     {
         place=0;
     }

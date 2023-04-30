@@ -20,7 +20,7 @@
 //#include <windows.h>
 //#include <winuser.h>
 using namespace std;
-//file_name storge_file loadFile
+//file_name storge_file loadFile abs(place)
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
@@ -196,15 +196,15 @@ void Document_Viewer::removeFromFile()
 
 
 
-//    remove(path.c_str());
-//    rename(tempPath.c_str(), path.c_str());
+    remove(path.c_str());
+    rename(tempPath.c_str(), path.c_str());
 
-//    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
-//    int s=remove(ttemp);
+    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
+    int s=remove(ttemp);
 
     //(mainWindow->names[mainWindow->setFileNum()]).erase(mainWindow->place%(mainWindow->names.size()));
     mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))-1));
-    mainWindow->currentName();
+    mainWindow->setMainItem();
 }
 
 void Document_Viewer::itemOpener()
@@ -234,7 +234,7 @@ void Document_Viewer::itemOpener()
             continue;
         PATH=p.second.first;
     }
-    //string PATH=mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first;
+
     PATH="\""+PATH+"\"";
     const char *c=(PATH).c_str();
     system(c);
