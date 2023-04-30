@@ -44,6 +44,8 @@ public:
                 //number of the line ,  path , name of the file , extention of the file
     vector< map < int , pair < string , pair < string , string > > > > names;
 
+    map<map < int , pair < string , pair < string , string > > > ,int >freqNames;
+
     set <string> temp_storge_file_names;
     vector<string>storge_file_names;
 

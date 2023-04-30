@@ -135,7 +135,12 @@ void MainWindow::fileNames()
 //        names[setFileNum()][tempPlace].first=path;
 //        names[setFileNum()][tempPlace].second.first=name;
 //        names[setFileNum()][tempPlace].second.second=exten;
-        names.push_back(temp);
+        if(freqNames[temp]!=-1)
+        {
+            names.push_back(temp);
+            freqNames[temp]=-1;
+
+        }
         tempPlace++;
     }
     fileCloser();
@@ -497,9 +502,16 @@ void MainWindow::generateFolders()
 
 void MainWindow::setMainItem()
 {
+    //there is a bug here
     map < int , pair < string , pair < string , string > > >  temp12;
     temp12=names[place%(names.size())];
-    string plzWorkStr=temp12[0].second.second;
+    string plzWorkStr;
+    for(auto p : temp12)
+    {
+        if(p.second.second.second =="")
+            continue;
+        plzWorkStr=p.second.second.second;
+    }
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
         document_preview_btn->setText("لا يوجد ملفات");
