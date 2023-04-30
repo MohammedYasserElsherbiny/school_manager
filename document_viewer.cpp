@@ -203,7 +203,7 @@ void Document_Viewer::removeFromFile()
     int s=remove(ttemp);
 
     //(mainWindow->names[mainWindow->setFileNum()]).erase(mainWindow->place%(mainWindow->names.size()));
-    mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))-1));
+    mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))));
     mainWindow->setMainItem();
 }
 

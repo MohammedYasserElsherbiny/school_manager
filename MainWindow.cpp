@@ -514,7 +514,7 @@ void MainWindow::setMainItem()
     int tempIdx;
     if(abs(place)==(int)(names.size()-1)&&(place<0))
     {
-        place=0;
+        place=names.size();
     }
     if(place<0)
     {
