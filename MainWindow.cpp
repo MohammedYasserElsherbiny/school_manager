@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-
+#include <cmath>
 MainWindow::MainWindow()
 {
     // Setup global Scene
@@ -508,6 +508,30 @@ void MainWindow::generateFolders()
 
 void MainWindow::setMainItem()
 {
+    //place=abs(place);
+
+    map < int , pair < string , pair < string , string > > >  temp12;
+    int tempIdx;
+    if(abs(place)==(int)(names.size()-1))
+    {
+        place=0;
+    }
+    if(place<0)
+    {
+        tempIdx=names.size()+place;
+    }
+    else
+    {
+        tempIdx=place%names.size();
+    }
+    temp12=names[tempIdx];
+    string plzWorkStr;
+    for(auto p : temp12)
+    {
+        if(p.second.second.second =="")
+            continue;
+        plzWorkStr=p.second.second.second;
+    }
 
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
@@ -522,15 +546,6 @@ void MainWindow::setMainItem()
 
 
 
-    map < int , pair < string , pair < string , string > > >  temp12;
-    temp12=names[place%(names.size())];
-    string plzWorkStr;
-    for(auto p : temp12)
-    {
-        if(p.second.second.second =="")
-            continue;
-        plzWorkStr=p.second.second.second;
-    }
 
     if(plzWorkStr=="txt")
     {
@@ -570,8 +585,21 @@ void MainWindow::setMainItem()
 string MainWindow::currentName()
 {
     map < int , pair < string , pair < string , string > > > temp;
-    temp=names[place%(names.size())];
-    return temp[place%(names.size())].second.first;
+    int tempIdx;
+    if(abs(place)==(int)(names.size()-1))
+    {
+        place=0;
+    }
+    if(place<0)
+    {
+        tempIdx=names.size()+place;
+    }
+    else
+    {
+        tempIdx=place%names.size();
+    }
+    temp=names[tempIdx];
+    return temp[tempIdx].second.first;
 }
 
 

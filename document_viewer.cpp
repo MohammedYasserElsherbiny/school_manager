@@ -196,26 +196,49 @@ void Document_Viewer::removeFromFile()
 
 
 
-    remove(path.c_str());
-    rename(tempPath.c_str(), path.c_str());
+//    remove(path.c_str());
+//    rename(tempPath.c_str(), path.c_str());
 
-    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
-    int s=remove(ttemp);
+//    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
+//    int s=remove(ttemp);
 
-    mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
-
+    //(mainWindow->names[mainWindow->setFileNum()]).erase(mainWindow->place%(mainWindow->names.size()));
+    mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))-1));
     mainWindow->currentName();
 }
 
 void Document_Viewer::itemOpener()
 {
+    mainWindow->fileOpener();
     if(filesystem::is_empty(mainWindow->storge_file_names[mainWindow->setFileNum()]))
             return ;
-
-    string PATH=mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first;
+    map < int , pair < string , pair < string , string > > >  temp12;
+    int tempIdx;
+    if(abs(mainWindow->place)==(int)(mainWindow->names.size()-1))
+    {
+        mainWindow->place=0;
+    }
+    if(mainWindow->place<0)
+    {
+        tempIdx=mainWindow->names.size()+mainWindow->place;
+    }
+    else
+    {
+        tempIdx=mainWindow->place%mainWindow->names.size();
+    }
+    temp12=mainWindow->names[tempIdx];
+    string PATH;
+    for(auto p : temp12)
+    {
+        if(p.second.second.second =="")
+            continue;
+        PATH=p.second.first;
+    }
+    //string PATH=mainWindow->names[mainWindow->setFileNum()][mainWindow->place%(mainWindow->names.size())].first;
     PATH="\""+PATH+"\"";
     const char *c=(PATH).c_str();
     system(c);
     //WinExec(c,SW_HIDE );
     //SW_HIDE
+    mainWindow->fileCloser();
 }
