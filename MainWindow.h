@@ -15,6 +15,9 @@
 #include <gradeoptions.h>
 #include <string>
 #include <QString>
+#include <QMessageBox>
+#include <QDebug>
+#include <iostream>
 
 class MainWindow : public QGraphicsView
 {

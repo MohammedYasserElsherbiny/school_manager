@@ -10,6 +10,11 @@
 #include <map>
 #include <QProcess>
 #include <set>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtCore/QFileInfo>
+#include <QTextDocument>
+
 using namespace std;
 
 class Document_Viewer : public QGraphicsView
@@ -28,15 +33,9 @@ private:
 
     QGraphicsProxyWidget *load_file_proxy, *remove_file_proxy, *print_file_proxy;
 
-
-
     fstream file;
 
-
     QProcess process;
-
-
-
 
     void showGradeOptions();
     void loadFile ();
@@ -47,9 +46,7 @@ private:
     void removeFromFile ();
     void itemOpener ();
     void moveToFolder ();
-
-
-
+    void printDocument(const QString& filePath);
 };
 
 #endif // DOCUMENT_VIEWER_H

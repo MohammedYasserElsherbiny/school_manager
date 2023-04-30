@@ -50,8 +50,10 @@ Document_Viewer::Document_Viewer()
     QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
     QObject::connect(remove_file, &QPushButton::clicked, this, & Document_Viewer::removeFromFile);
     QObject::connect(mainWindow->document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::itemOpener);
-
-
+    QObject::connect(print_file, &QPushButton::clicked, [=]() {
+        QString filePath = "/home/ahmed/Downloads/text.txt";
+        printDocument(filePath);
+    });
 }
 
 void Document_Viewer::show_window()
@@ -270,4 +272,41 @@ void Document_Viewer::moveToFolder()
 
 
     rename(oldPath.c_str(), newPath.c_str());
+}
+
+void Document_Viewer::printDocument(const QString &filePath)
+{
+    // create a printer object
+    QPrinter printer;
+
+    // create a print dialog and set the printer
+    QPrintDialog printDialog(&printer);
+    printDialog.setWindowTitle("Print Document");
+    if (printDialog.exec() != QDialog::Accepted) {
+        return; // user cancelled the dialog
+    }
+
+    // set the document name for the printer
+    QFileInfo fileInfo(filePath);
+    printer.setDocName(fileInfo.fileName());
+
+    // set the printer output format to NativeFormat
+    printer.setOutputFormat(QPrinter::NativeFormat);
+
+    // try to print to the default printer
+    if (!printer.isValid()) {
+        QMessageBox::warning(nullptr, "Print Error", "Cannot print to the selected printer.");
+        return;
+    }
+
+    // create a document object and set the printer
+    QTextDocument document;
+    QFile file(filePath);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream stream(&file);
+        document.setPlainText(stream.readAll());
+        file.close();
+    }
+    document.setPageSize(printer.pageRect().size());
+    document.print(&printer);
 }
