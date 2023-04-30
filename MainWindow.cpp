@@ -136,6 +136,7 @@ void MainWindow::fileNames()
 //        names[setFileNum()][tempPlace].first=path;
 //        names[setFileNum()][tempPlace].second.first=name;
 //        names[setFileNum()][tempPlace].second.second=exten;
+
         if(freqNames[temp]!=-1)
         {
             names.push_back(temp);
@@ -512,27 +513,10 @@ void MainWindow::setMainItem()
     //place=abs(pla  ce);
 
     map < int , pair < string , pair < string , string > > >  temp12;
-    int tempIdx;
-    if(abs(place)==(int)(names.size()-1)&&(place<0))
-    {
-        place=names.size();
-    }
-    if(place<0)
-    {
-        tempIdx=names.size()+place;
-    }
-    else
-    {
-        tempIdx=place%names.size();
-    }
-    temp12=names[tempIdx];
+    int tempIdx=0;
+
     string plzWorkStr;
-    for(auto p : temp12)
-    {
-        if(p.second.second.second =="")
-            continue;
-        plzWorkStr=p.second.second.second;
-    }
+
 
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
@@ -543,6 +527,27 @@ void MainWindow::setMainItem()
     else
     {
         document_preview_btn->setText(QString::fromStdString(currentName()));
+
+        if(abs(place)==(int)(names.size()-1)&&(place<0))
+        {
+            place=names.size();
+        }
+        if(place<0)
+        {
+            tempIdx=names.size()+place;
+        }
+        else if(place>0)
+        {
+            tempIdx=place%names.size();
+        }
+        temp12=names[tempIdx];
+
+        for(auto p : temp12)
+        {
+            if(p.second.second.second =="")
+                continue;
+            plzWorkStr=p.second.second.second;
+        }
     }
 
 
