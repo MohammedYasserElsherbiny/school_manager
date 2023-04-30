@@ -38,6 +38,11 @@ Document_Viewer::Document_Viewer()
     remove_file = new QPushButton("حذف");
     print_file = new QPushButton("طباعة");
 
+    load_file->hide();
+    remove_file->hide();
+    print_file->hide();
+    previous_document_btn->hide();
+    next_document_btn->hide();
 
     QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
     QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
@@ -107,8 +112,15 @@ void Document_Viewer::show_window()
         mainWindow->height * 65 / 100 + 75 + 5
     );
 
+    load_file->show();
+    remove_file->show();
+    print_file->show();
+    previous_document_btn->show();
+    next_document_btn->show();
 
     mainWindow->backBtn->show();
+    mainWindow->document_preview_btn->show();
+
 
     QObject::connect(mainWindow->backBtn, &QPushButton::clicked, this, &Document_Viewer::showGradeOptions);
 
@@ -188,7 +200,7 @@ void Document_Viewer::removeFromFile()
     rename(tempPath.c_str(), path.c_str());
 
     const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
-    //int s=remove(ttemp);
+    int s=remove(ttemp);
 
     mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
 

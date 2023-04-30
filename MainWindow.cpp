@@ -43,6 +43,7 @@ MainWindow::MainWindow()
                           height - backBtnProxy->boundingRect().height() - 350);
 
     backBtn->hide();
+    //document_preview_btn->hide();
 
 
     // create on click event listeners
@@ -507,16 +508,7 @@ void MainWindow::generateFolders()
 
 void MainWindow::setMainItem()
 {
-    //there is a bug here
-    map < int , pair < string , pair < string , string > > >  temp12;
-    temp12=names[place%(names.size())];
-    string plzWorkStr;
-    for(auto p : temp12)
-    {
-        if(p.second.second.second =="")
-            continue;
-        plzWorkStr=p.second.second.second;
-    }
+
     if(filesystem::is_empty(storge_file_names[setFileNum()]))
     {
         document_preview_btn->setText("لا يوجد ملفات");
@@ -526,6 +518,18 @@ void MainWindow::setMainItem()
     else
     {
         document_preview_btn->setText(QString::fromStdString(currentName()));
+    }
+
+
+
+    map < int , pair < string , pair < string , string > > >  temp12;
+    temp12=names[place%(names.size())];
+    string plzWorkStr;
+    for(auto p : temp12)
+    {
+        if(p.second.second.second =="")
+            continue;
+        plzWorkStr=p.second.second.second;
     }
 
     if(plzWorkStr=="txt")
