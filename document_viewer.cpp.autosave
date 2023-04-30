@@ -188,7 +188,7 @@ void Document_Viewer::removeFromFile()
     rename(tempPath.c_str(), path.c_str());
 
     const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
-    //int s=remove(ttemp);
+    int s=remove(ttemp);
 
     mainWindow->names[mainWindow->setFileNum()].erase(mainWindow->place%(mainWindow->names.size()));
 

@@ -154,7 +154,12 @@ void MainWindow::fileOpener()
 
 void MainWindow::fileCloser()
 {
-    storge_files[storge_file_names[setFileNum()]].close();
+    //storge_files[storge_file_names[setFileNum()]].close();
+
+    for(auto tempFileNames : storge_file_names)
+    {
+        storge_files[tempFileNames].close();
+    }
 }
 
 int MainWindow::setFileNum()
