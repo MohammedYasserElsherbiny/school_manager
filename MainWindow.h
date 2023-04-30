@@ -68,6 +68,7 @@ public:
     void fileCloser ();
     void setMainItem ();
     string currentName ();
+    string setFolderDirectorie();
 
 
 

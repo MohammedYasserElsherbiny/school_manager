@@ -13,6 +13,7 @@
 #include <filesystem>
 #include <unistd.h>
 #include <cstdio>
+//#include <winbase.h>
 //#include <QProcess>
 //#include <QDir>
 //#include <stdio.h>
@@ -141,8 +142,10 @@ void Document_Viewer::loadFile()
 
     mainWindow->storge_files[mainWindow->storge_file_names[mainWindow->setFileNum()]] << mainWindow->file_name.toStdString()<<endl ;
 
+    //set the file to the folder
     mainWindow->fileNames();
     mainWindow->setMainItem();
+    moveToFolder();
     mainWindow->fileCloser();
 
 }
@@ -241,4 +244,31 @@ void Document_Viewer::itemOpener()
     //WinExec(c,SW_HIDE );
     //SW_HIDE
     mainWindow->fileCloser();
+}
+
+void Document_Viewer::moveToFolder()
+{
+    string newPath=mainWindow->setFolderDirectorie();
+    string oldPath;
+    map < int , pair < string , pair < string , string > > > temp;
+    int tempIdx;
+    if(abs(mainWindow->place)==(int)(mainWindow->names.size()-1)&&(mainWindow->place<0))
+    {
+        mainWindow->place=0;
+    }
+    if(mainWindow->place<0)
+    {
+        tempIdx=mainWindow->names.size()+mainWindow->place;
+    }
+    else
+    {
+        tempIdx=mainWindow->place%mainWindow->names.size();
+    }
+    temp=mainWindow->names[mainWindow->names.size()-1];
+    oldPath=temp[mainWindow->names.size()-1].first;
+
+    newPath=newPath+"/"+temp[mainWindow->names.size()-1].second.first+"."+temp[mainWindow->names.size()-1].second.second;
+
+
+    rename(oldPath.c_str(), newPath.c_str());
 }

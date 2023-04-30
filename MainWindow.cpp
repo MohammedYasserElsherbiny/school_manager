@@ -484,6 +484,7 @@ void MainWindow::generateFolders()
     filesystem::create_directories("C:/school_manager/male/High school/additional");
     filesystem::create_directories("C:/school_manager/male/High school/Circular");
     filesystem::create_directories("C:/school_manager/male/High school/Plan");
+    filesystem::create_directories("C:/school_manager/male/High school/Reports");
 
     //female
     filesystem::create_directories("C:/school_manager/female/Primary/additional");
@@ -602,4 +603,151 @@ string MainWindow::currentName()
     return temp[tempIdx].second.first;
 }
 
+string MainWindow::setFolderDirectorie()
+{
+    string gen=gender,gra=grade,opt=option;
 
+
+
+    if(gen=="بنات")
+    {
+        if(gra=="مرحلة الثانوي")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/female/High school/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/female/High school/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/female/High school/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/female/High school/Reports";
+            }
+        }
+        else if(gra=="مرحلة المتوسط")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/female/Intermediate/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/female/Intermediate/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/female/Intermediate/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/female/Intermediate/Reports";
+            }
+        }
+        else if(gra=="مرحلة الروضة")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/female/Kindergarten/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/female/Kindergarten/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/female/Kindergarten/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/female/Kindergarten/Reports";
+            }
+        }
+        else
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/female/Primary/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/female/Primary/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/female/Primary/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/female/Primary/Reports";
+            }
+        }
+    }
+    else if(gen=="بنين")
+    {
+        if(gra=="مرحلة الثانوي")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/male/High school/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/male/High school/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/male/High school/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/male/High school/Reports";
+            }
+        }
+        else if(gra=="مرحلة المتوسط")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/male/Intermediate/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/male/Intermediate/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/male/Intermediate/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/male/Intermediate/Reports";
+            }
+        }
+        else if(gra=="مرحلة الابتدائي")
+        {
+            if(opt=="اضافي")
+            {
+                return "C:/school_manager/male/Primary/additional";
+            }
+            else if(opt=="التعاميم")
+            {
+                return "C:/school_manager/male/Primary/Circular";
+            }
+            else if(opt=="الخطة والتسجيل")
+            {
+                return "C:/school_manager/male/Primary/Plan";
+            }
+            else
+            {
+                return "C:/school_manager/male/Primary/Reports";
+            }
+        }
+
+    }
+
+}

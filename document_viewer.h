@@ -46,6 +46,7 @@ private:
 
     void removeFromFile ();
     void itemOpener ();
+    void moveToFolder ();
 
 
 
