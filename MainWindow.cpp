@@ -14,6 +14,7 @@ MainWindow::MainWindow()
     width = 900; // screenGeometry.width()
     height = 600; // screenGeometry.height()
 
+    document_preview_btn = new QPushButton();
     // Set scene properties
     scene->setSceneRect(0,0, width, height); // TODO: Improve screen size
 
@@ -39,9 +40,33 @@ MainWindow::MainWindow()
 
     backBtnProxy = scene->addWidget(backBtn);
     backBtnProxy->setPos(width/8 - backBtnProxy->boundingRect().width()+50,
-                          height - backBtnProxy->boundingRect().height() - 350);
+                          height - backBtnProxy->boundingRect().height() - 530);
+
+
+    /*mainWindow->document_preview_proxy = mainWindow->scene->addWidget(mainWindow->document_preview_btn);
+    mainWindow->document_preview_proxy->resize(
+        mainWindow->width * 45 / 100,
+        150
+    );
+    mainWindow->document_preview_proxy->setPos(
+        mainWindow->width/2 - mainWindow->document_preview_proxy->boundingRect().width()/2,
+        mainWindow->height * 65 / 100 - mainWindow->document_preview_proxy->boundingRect().height()/2
+    );
+*/
+
+//    document_preview_proxy = scene->addWidget(document_preview_btn);
+//    document_preview_proxy->resize(
+//        width * 45 / 10,
+//        150
+//    );
+
+//    document_preview_proxy->setPos(
+//        width/2 - document_preview_proxy->boundingRect().width()/2,
+//        height * 65 / 100 - document_preview_proxy->boundingRect().height()/2
+//    );
 
     backBtn->hide();
+    document_preview_btn->hide();
     //document_preview_btn->hide();
 
 
@@ -90,6 +115,7 @@ void MainWindow::fileNames()
     while(getline(ifile, path))
     {
 
+
         string name;
         string exten;
         bool dotFlag= false;
@@ -124,9 +150,7 @@ void MainWindow::fileNames()
         temp[tempPlace].second.first=name;
         temp[tempPlace].second.second=exten;
 
-//        names[setFileNum()][tempPlace].first=path;
-//        names[setFileNum()][tempPlace].second.first=name;
-//        names[setFileNum()][tempPlace].second.second=exten;
+
 
         if(freqNames[temp]!=-1)
         {

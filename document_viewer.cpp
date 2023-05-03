@@ -13,6 +13,8 @@
 #include <filesystem>
 #include <unistd.h>
 #include <cstdio>
+#include <QPrinter>
+#include <QMessageBox>
 //#include <winbase.h>
 //#include <QProcess>
 //#include <QDir>
@@ -21,7 +23,7 @@
 //#include <windows.h>
 //#include <winuser.h>
 using namespace std;
-//file_name storge_file loadFile abs(place)
+//file_name storge_file loadFile abs(place) document_preview
 extern MainWindow * mainWindow;
 
 Document_Viewer::Document_Viewer()
@@ -32,7 +34,7 @@ Document_Viewer::Document_Viewer()
 
     previous_document_btn = new QPushButton("<");
     next_document_btn = new QPushButton(">");
-    mainWindow->document_preview_btn = new QPushButton();
+    //mainWindow->document_preview_btn = new QPushButton();
     //mainWindow->setMainItem();
 
     load_file = new QPushButton("اضافة");
@@ -44,20 +46,7 @@ Document_Viewer::Document_Viewer()
     print_file->hide();
     previous_document_btn->hide();
     next_document_btn->hide();
-
-    QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
-    QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
-    QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
-    QObject::connect(remove_file, &QPushButton::clicked, this, & Document_Viewer::removeFromFile);
-    QObject::connect(mainWindow->document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::itemOpener);
-    QObject::connect(print_file, &QPushButton::clicked, [=]() {
-        QString filePath = "/home/ahmed/Downloads/text.txt";
-        printDocument(filePath);
-    });
-}
-
-void Document_Viewer::show_window()
-{
+    //mainWindow->document_preview_btn->hide();
 
     previous_document_proxy = mainWindow->scene->addWidget(previous_document_btn);
     previous_document_proxy->setMinimumWidth(25);
@@ -81,15 +70,8 @@ void Document_Viewer::show_window()
         mainWindow->height * 65 / 100 - next_document_proxy->boundingRect().height()/2
     );
 
-    mainWindow->document_preview_proxy = mainWindow->scene->addWidget(mainWindow->document_preview_btn);
-    mainWindow->document_preview_proxy->resize(
-        mainWindow->width * 45 / 100,
-        150
-    );
-    mainWindow->document_preview_proxy->setPos(
-        mainWindow->width/2 - mainWindow->document_preview_proxy->boundingRect().width()/2,
-        mainWindow->height * 65 / 100 - mainWindow->document_preview_proxy->boundingRect().height()/2
-    );
+
+
 
     load_file_proxy = mainWindow->scene->addWidget(load_file);
     remove_file_proxy = mainWindow->scene->addWidget(remove_file);
@@ -114,6 +96,33 @@ void Document_Viewer::show_window()
         mainWindow->width * 25 / 100 + bottomBtnWidth*2 + 12,
         mainWindow->height * 65 / 100 + 75 + 5
     );
+
+
+    mainWindow->document_preview_proxy = mainWindow->scene->addWidget(mainWindow->document_preview_btn);
+        mainWindow->document_preview_proxy->resize(
+            mainWindow->width * 45 / 100,
+            150
+        );
+        mainWindow->document_preview_proxy->setPos(
+            mainWindow->width/2 - mainWindow->document_preview_proxy->boundingRect().width()/2,
+            mainWindow->height * 65 / 100 - mainWindow->document_preview_proxy->boundingRect().height()/2
+        );
+
+
+    QObject::connect(load_file, &QPushButton::clicked, this, & Document_Viewer::loadFile);
+    QObject::connect(next_document_btn, &QPushButton::clicked, this, & Document_Viewer::nextItem);
+    QObject::connect(previous_document_btn, &QPushButton::clicked, this, & Document_Viewer::previousItem);
+    QObject::connect(remove_file, &QPushButton::clicked, this, & Document_Viewer::removeFromFile);
+    QObject::connect(mainWindow->document_preview_btn, &QPushButton::clicked, this, & Document_Viewer::itemOpener);
+    QObject::connect(print_file, &QPushButton::clicked, [=]() {
+        QString filePath = "C:/Users/Mohamed/Desktop/research/temp files/test 1.txt";
+        printDocument(filePath);
+    });
+}
+
+void Document_Viewer::show_window()
+{
+
 
     load_file->show();
     remove_file->show();
@@ -140,6 +149,10 @@ void Document_Viewer::loadFile()
     mainWindow->fileOpener();
 
     mainWindow->file_name = QFileDialog::getOpenFileName(this,"اختر الملف","C://");
+    if(mainWindow->file_name=="")
+    {
+        return ;
+    }
 
     mainWindow->storge_files[mainWindow->storge_file_names[mainWindow->setFileNum()]] << mainWindow->file_name.toStdString()<<endl ;
 
@@ -176,39 +189,49 @@ void Document_Viewer::nextItem()
 void Document_Viewer::removeFromFile()
 {
 
+    int ret = QMessageBox::question(this, tr("Confirmation"), tr("هل انت متاكد من حذف هذا الملف؟"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
 
-    string line,emptyString="";
-    string path=mainWindow->storge_file_names[mainWindow->setFileNum()],tempPath="temp.txt";
-    string eraseLine=currentItem();
-    ifstream fin;
-
-    fin.open(path);
-
-    ofstream temp;
-    temp.open(tempPath, ios::out|ios::binary);
-
-    while (getline(fin, line))
+    if (ret == QMessageBox::Yes)
     {
-            if (line != eraseLine)
-                temp << line << std::endl;
+        string line,emptyString="";
+        string path=mainWindow->storge_file_names[mainWindow->setFileNum()],tempPath="temp.txt";
+        string eraseLine=currentItem();
+        ifstream fin;
+
+        fin.open(path);
+
+        ofstream temp;
+        temp.open(tempPath, ios::out|ios::binary);
+
+        while (getline(fin, line))
+        {
+                if (line != eraseLine)
+                    temp << line << std::endl;
+        }
+
+
+        temp.close();
+        fin.close();
+        mainWindow->fileCloser();
+
+
+
+        remove(path.c_str());
+        rename(tempPath.c_str(), path.c_str());
+
+        const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
+        int s=remove(ttemp);
+
+        //(mainWindow->names[mainWindow->setFileNum()]).erase(mainWindow->place%(mainWindow->names.size()));
+        mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))));
+        mainWindow->setMainItem();
+    }
+    else
+    {
+        return ;
     }
 
 
-    temp.close();
-    fin.close();
-    mainWindow->fileCloser();
-
-
-
-    remove(path.c_str());
-    rename(tempPath.c_str(), path.c_str());
-
-    const char *ttemp=(mainWindow->names[mainWindow->place%(mainWindow->names.size())][mainWindow->place%(mainWindow->names.size())].first).c_str();
-    int s=remove(ttemp);
-
-    //(mainWindow->names[mainWindow->setFileNum()]).erase(mainWindow->place%(mainWindow->names.size()));
-    mainWindow->names.erase(mainWindow->names.begin()+((mainWindow->place%(mainWindow->names.size()))));
-    mainWindow->setMainItem();
 }
 
 void Document_Viewer::itemOpener()
@@ -307,6 +330,7 @@ void Document_Viewer::printDocument(const QString &filePath)
         document.setPlainText(stream.readAll());
         file.close();
     }
-    document.setPageSize(printer.pageRect().size());
+    auto tempPrinter= printer.pageRect(QPrinter::Unit());
+    document.setPageSize(tempPrinter.size());
     document.print(&printer);
 }
