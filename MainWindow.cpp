@@ -43,27 +43,7 @@ MainWindow::MainWindow()
                           height - backBtnProxy->boundingRect().height() - 530);
 
 
-    /*mainWindow->document_preview_proxy = mainWindow->scene->addWidget(mainWindow->document_preview_btn);
-    mainWindow->document_preview_proxy->resize(
-        mainWindow->width * 45 / 100,
-        150
-    );
-    mainWindow->document_preview_proxy->setPos(
-        mainWindow->width/2 - mainWindow->document_preview_proxy->boundingRect().width()/2,
-        mainWindow->height * 65 / 100 - mainWindow->document_preview_proxy->boundingRect().height()/2
-    );
-*/
 
-//    document_preview_proxy = scene->addWidget(document_preview_btn);
-//    document_preview_proxy->resize(
-//        width * 45 / 10,
-//        150
-//    );
-
-//    document_preview_proxy->setPos(
-//        width/2 - document_preview_proxy->boundingRect().width()/2,
-//        height * 65 / 100 - document_preview_proxy->boundingRect().height()/2
-//    );
 
     backBtn->hide();
     document_preview_btn->hide();
@@ -488,37 +468,37 @@ void MainWindow::generateFiles()
 void MainWindow::generateFolders()
 {
 
-    //male
-    filesystem::create_directories("C:/school_manager/male/Primary/additional");
-    filesystem::create_directories("C:/school_manager/male/Primary/Circular");
-    filesystem::create_directories("C:/school_manager/male/Primary/Plan");
-    filesystem::create_directories("C:/school_manager/male/Primary/Reports");
-    filesystem::create_directories("C:/school_manager/male/Intermediate/additional");
-    filesystem::create_directories("C:/school_manager/male/Intermediate/Circular");
-    filesystem::create_directories("C:/school_manager/male/Intermediate/Plan");
-    filesystem::create_directories("C:/school_manager/male/Intermediate/Reports");
-    filesystem::create_directories("C:/school_manager/male/High school/additional");
-    filesystem::create_directories("C:/school_manager/male/High school/Circular");
-    filesystem::create_directories("C:/school_manager/male/High school/Plan");
-    filesystem::create_directories("C:/school_manager/male/High school/Reports");
+//    //male
+//    filesystem::create_directories("C:/school_manager/male/Primary/additional");
+//    filesystem::create_directories("C:/school_manager/male/Primary/Circular");
+//    filesystem::create_directories("C:/school_manager/male/Primary/Plan");
+//    filesystem::create_directories("C:/school_manager/male/Primary/Reports");
+//    filesystem::create_directories("C:/school_manager/male/Intermediate/additional");
+//    filesystem::create_directories("C:/school_manager/male/Intermediate/Circular");
+//    filesystem::create_directories("C:/school_manager/male/Intermediate/Plan");
+//    filesystem::create_directories("C:/school_manager/male/Intermediate/Reports");
+//    filesystem::create_directories("C:/school_manager/male/High school/additional");
+//    filesystem::create_directories("C:/school_manager/male/High school/Circular");
+//    filesystem::create_directories("C:/school_manager/male/High school/Plan");
+//    filesystem::create_directories("C:/school_manager/male/High school/Reports");
 
-    //female
-    filesystem::create_directories("C:/school_manager/female/Primary/additional");
-    filesystem::create_directories("C:/school_manager/female/Primary/Circular");
-    filesystem::create_directories("C:/school_manager/female/Primary/Plan");
-    filesystem::create_directories("C:/school_manager/female/Primary/Reports");
-    filesystem::create_directories("C:/school_manager/female/Intermediate/additional");
-    filesystem::create_directories("C:/school_manager/female/Intermediate/Circular");
-    filesystem::create_directories("C:/school_manager/female/Intermediate/Plan");
-    filesystem::create_directories("C:/school_manager/female/Intermediate/Reports");
-    filesystem::create_directories("C:/school_manager/female/High school/additional");
-    filesystem::create_directories("C:/school_manager/female/High school/Circular");
-    filesystem::create_directories("C:/school_manager/female/High school/Plan");
-    filesystem::create_directories("C:/school_manager/female/High school/Reports");
-    filesystem::create_directories("C:/school_manager/female/Kindergarten/additional");
-    filesystem::create_directories("C:/school_manager/female/Kindergarten/Circular");
-    filesystem::create_directories("C:/school_manager/female/Kindergarten/Plan");
-    filesystem::create_directories("C:/school_manager/female/Kindergarten/Reports");
+//    //female
+//    filesystem::create_directories("C:/school_manager/female/Primary/additional");
+//    filesystem::create_directories("C:/school_manager/female/Primary/Circular");
+//    filesystem::create_directories("C:/school_manager/female/Primary/Plan");
+//    filesystem::create_directories("C:/school_manager/female/Primary/Reports");
+//    filesystem::create_directories("C:/school_manager/female/Intermediate/additional");
+//    filesystem::create_directories("C:/school_manager/female/Intermediate/Circular");
+//    filesystem::create_directories("C:/school_manager/female/Intermediate/Plan");
+//    filesystem::create_directories("C:/school_manager/female/Intermediate/Reports");
+//    filesystem::create_directories("C:/school_manager/female/High school/additional");
+//    filesystem::create_directories("C:/school_manager/female/High school/Circular");
+//    filesystem::create_directories("C:/school_manager/female/High school/Plan");
+//    filesystem::create_directories("C:/school_manager/female/High school/Reports");
+//    filesystem::create_directories("C:/school_manager/female/Kindergarten/additional");
+//    filesystem::create_directories("C:/school_manager/female/Kindergarten/Circular");
+//    filesystem::create_directories("C:/school_manager/female/Kindergarten/Plan");
+//    filesystem::create_directories("C:/school_manager/female/Kindergarten/Reports");
 
 
 }
@@ -595,6 +575,11 @@ void MainWindow::setMainItem()
     else if(plzWorkStr=="docx"||plzWorkStr=="doc")
     {
         document_preview_btn->setIcon(QIcon(":/Assets/Images/word.jpg"));
+        document_preview_btn->setIconSize(QSize(65, 65));
+    }
+    else if(plzWorkStr=="pdf")
+    {
+        document_preview_btn->setIcon(QIcon(":/Assets/Images/download.png"));
         document_preview_btn->setIconSize(QSize(65, 65));
     }
     else

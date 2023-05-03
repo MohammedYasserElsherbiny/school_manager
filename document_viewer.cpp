@@ -189,7 +189,7 @@ void Document_Viewer::nextItem()
 void Document_Viewer::removeFromFile()
 {
 
-    int ret = QMessageBox::question(this, tr("Confirmation"), tr("هل انت متاكد من حذف هذا الملف؟"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    int ret = QMessageBox::question(this, tr("تحذير"), tr("هل انت متاكد من حذف هذا الملف؟ لن تستطيع الوصول الى هذا الملف مرة اخرى"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
 
     if (ret == QMessageBox::Yes)
     {
@@ -272,29 +272,29 @@ void Document_Viewer::itemOpener()
 
 void Document_Viewer::moveToFolder()
 {
-    string newPath=mainWindow->setFolderDirectorie();
-    string oldPath;
-    map < int , pair < string , pair < string , string > > > temp;
-    int tempIdx;
-    if(abs(mainWindow->place)==(int)(mainWindow->names.size()-1)&&(mainWindow->place<0))
-    {
-        mainWindow->place=0;
-    }
-    if(mainWindow->place<0)
-    {
-        tempIdx=mainWindow->names.size()+mainWindow->place;
-    }
-    else
-    {
-        tempIdx=mainWindow->place%mainWindow->names.size();
-    }
-    temp=mainWindow->names[mainWindow->names.size()-1];
-    oldPath=temp[mainWindow->names.size()-1].first;
+//    string newPath=mainWindow->setFolderDirectorie();
+//    string oldPath;
+//    map < int , pair < string , pair < string , string > > > temp;
+//    int tempIdx;
+//    if(abs(mainWindow->place)==(int)(mainWindow->names.size()-1)&&(mainWindow->place<0))
+//    {
+//        mainWindow->place=0;
+//    }
+//    if(mainWindow->place<0)
+//    {
+//        tempIdx=mainWindow->names.size()+mainWindow->place;
+//    }
+//    else
+//    {
+//        tempIdx=mainWindow->place%mainWindow->names.size();
+//    }
+//    temp=mainWindow->names[mainWindow->names.size()-1];
+//    oldPath=temp[mainWindow->names.size()-1].first;
 
-    newPath=newPath+"/"+temp[mainWindow->names.size()-1].second.first+"."+temp[mainWindow->names.size()-1].second.second;
+//    newPath=newPath+"/"+temp[mainWindow->names.size()-1].second.first+"."+temp[mainWindow->names.size()-1].second.second;
 
 
-    rename(oldPath.c_str(), newPath.c_str());
+//    rename(oldPath.c_str(), newPath.c_str());
 }
 
 void Document_Viewer::printDocument(const QString &filePath)
